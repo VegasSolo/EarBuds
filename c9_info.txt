@@ -1,6 +1,14 @@
 #Cloud9 Command Information
+# ------------------------ #
 
-git add filename          ## after creating new file in C9, add said file to be updated
+
+# BEFORE DOING ANY OF THE BELOW COMMANDS #
+
+git status                  ## displays status of your directory with git repository, make sure you're up-to-date before doing anything
+
+# ------------------------- #
+
+git add filename            ## after creating new file in C9, add said file to be updated
 
 git commit -am "filename"   ## commit the added file 
 
