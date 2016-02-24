@@ -1,0 +1,9 @@
+#Cloud9 Command Information
+
+git add filename          ## after creating new file in C9, add said file to be updated
+
+git commit -am "filename"   ## commit the added file 
+
+git push                    ## push the commited files to the github repository
+
+git pull                    ## update your c9 with the changes in git
