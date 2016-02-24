@@ -8,6 +8,12 @@ git status                  ## displays status of your directory with git reposi
 
 # ------------------------- #
 
+# TO UPDATE YOUR BRANCH FROM THE MASTER #
+
+git pull origin master      ## pulls changes from master to your branch
+
+# ------------------------- #
+
 git add filename            ## after creating new file in C9, add said file to be updated
 
 git commit -am "filename"   ## commit the added file 
