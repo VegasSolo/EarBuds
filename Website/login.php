@@ -235,16 +235,16 @@ function check_user(){
 	
 		<img src="<?=$_SESSION['img']?>" style="<?=$DISPLAYuser?>" width="200px" height="200px"><br>
 		<form name="logout" style="<?=$DISPLAYuser?>" action="login.php" method="get">
-		<input type="hidden" name="logout" value="doLogout">
-		<input type="submit" value="Logout" />
+			<input type="hidden" name="logout" value="doLogout">
+			<input type="submit" value="Logout" />
 		</form>
 	
 	
 		<div style="<?=$DISPLAYlogin?>">Login:</div><br>
 		<form name="login" style="<?=$DISPLAYlogin?>" action="login.php" method="get">
-		User Name:<input type="text" name="user"/><br>
-		Password: <input type="password" name="pass"/><br>
-		<input type="submit" value="Login"/>
+			User Name:<input type="text" name="user"/><br>
+			Password: <input type="password" name="pass"/><br>
+			<input type="submit" value="Login"/>
 		</form><br>
 	
 		<hr>
@@ -252,38 +252,38 @@ function check_user(){
 		<br>
 		<div style="<?=$DISPLAYlogin?>">Create Account:</div><br>
 		<form name="create" style="<?=$DISPLAYlogin?>" action="login.php" method="get">
-		User Name: <input type="text" name="user"/><br>
-		Password:  <input type="password" name="pass"/><br>
-		First Name:<input type="text" name="fname"/><br>
-		Last Name: <input type="text" name="lname"/><br>
-		<input type="hidden" name="create" value="true">
-		<input type="submit" value="Create"/>
+			User Name: <input type="text" name="user"/><br>
+			Password:  <input type="password" name="pass"/><br>
+			First Name:<input type="text" name="fname"/><br>
+			Last Name: <input type="text" name="lname"/><br>
+			<input type="hidden" name="create" value="true">
+			<input type="submit" value="Create"/>
 		</form><br>
 	
 		<div style="<?=$DISPLAYuser?>">Edit User:</div><br>
 		<form name="edit" action="login.php" style="<?=$DISPLAYuser?>" method="get">
-		<table style="<?=$DISPLAYuser?>">
-		<tr>
-			<td>First Name:</td>
-			<td><input type="text" name="fname" value="<?=$_SESSION['fname']?>"/></td>
-		</tr>
-		<tr>
-			<td>Last Name:</td>
-			<td><input type="text" name="lname" value="<?=$_SESSION['lname']?>"/></td>
-		</tr>
-		<tr>
-			<td>Background color:</td>
-			<td><input type="text" name="color" value="<?=$_SESSION['color']?>"/></td>
-		</tr>
-		<tr>
-			<td>Title:</td>
-			<td><input type="text" name="title" value="<?=$_SESSION['title']?>"/></td>
-		</tr>
-		<tr>
-			<td>Image:</td>
-			<td><input type="text" name="img" value="<?=$_SESSION['img']?>"/></td>
-		</tr>
-		</table>
+			<table style="<?=$DISPLAYuser?>">
+			<tr>
+				<td>First Name:</td>
+				<td><input type="text" name="fname" value="<?=$_SESSION['fname']?>"/></td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>
+				<td><input type="text" name="lname" value="<?=$_SESSION['lname']?>"/></td>
+			</tr>
+			<tr>
+				<td>Background color:</td>
+				<td><input type="text" name="color" value="<?=$_SESSION['color']?>"/></td>
+			</tr>
+			<tr>
+				<td>Title:</td>
+				<td><input type="text" name="title" value="<?=$_SESSION['title']?>"/></td>
+			</tr>
+			<tr>
+				<td>Image:</td>
+				<td><input type="text" name="img" value="<?=$_SESSION['img']?>"/></td>
+			</tr>
+			</table>
 		<input type="hidden" name="edit" value="true">
 		<br><input type="submit" value="Edit Account Info" />
 		</form>
