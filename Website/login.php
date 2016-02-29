@@ -135,7 +135,7 @@ function check_user(){
 /////////////////////////////////////////////////////////////////////////////////////
 
 
-//Do this if on login screen
+	//Do this if on login screen
 	//Do this if you need to edit user
 	if(isset($_REQUEST["edit"]) && $_REQUEST["edit"]  == true){ 
 		session_start();
