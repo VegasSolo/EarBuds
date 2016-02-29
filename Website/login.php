@@ -66,7 +66,7 @@ function read_f(){
 function write_f(){
 	global $userfile,$IN_A_SESSION;
 	if(!$IN_A_SESSION){
-		$usercreate = $_REQUEST["user"].";".$_REQUEST["pass"].";".$_REQUEST["fname"].";".$_REQUEST["lname"].";"."white".";"."Welcome to Nicholas Mize's Assignment 11 PHP page!".";"."http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Stick_Figure.svg/170px-Stick_Figure.svg.png\n";
+		$usercreate = $_REQUEST["user"].";".$_REQUEST["pass"].";".$_REQUEST["fname"].";".$_REQUEST["lname"].";"."white".";".$_REQUEST["fname"]." ".$_REQUEST["lname"]."'s Profile.".";"."http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Stick_Figure.svg/170px-Stick_Figure.svg.png\n";
 	}
 	else{
 		$usercreate = $_SESSION["user"].";".$_SESSION["pass"].";".$_REQUEST["fname"].";".$_REQUEST["lname"].";".$_REQUEST["color"].";".$_REQUEST["title"].";".$_REQUEST["img"]."\n";
@@ -225,7 +225,6 @@ function check_user(){
 	<head><title><?=$pagetitle?></title></head>
 
 	<h1><?=$pagetitle?></h1>
-	<br>
 	<font color="red"><?=$ERRORMSG?></font>
 
 	<hr>

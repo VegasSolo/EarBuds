@@ -1,1 +1,1 @@
-nrmize;123;Nick;Mize;white;Welcome to Nicholas Mize's Assignment 11 PHP page!;http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Stick_Figure.svg/170px-Stick_Figure.svg.png
+nrmize;123;Nick;Mize;white;Nick Mize's Profile.;http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Stick_Figure.svg/170px-Stick_Figure.svg.png
