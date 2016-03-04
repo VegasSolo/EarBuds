@@ -1,7 +1,7 @@
 <?php
 	//Nick Mize's Implementation of login screen for website
 	//Define variable
-	$pagetitle = "Welcome to Music Site";
+	$pagetitle = "Welcome to StreamSpace";
 	$userfile = "../Database/account-info.txt";
 	$ERRORMSG = "";
 	$IN_A_SESSION = false;
@@ -66,7 +66,7 @@ function read_f(){
 function write_f(){
 	global $userfile,$IN_A_SESSION;
 	if(!$IN_A_SESSION){
-		$usercreate = $_REQUEST["user"].";".$_REQUEST["pass"].";".$_REQUEST["fname"].";".$_REQUEST["lname"].";"."white".";".$_REQUEST["fname"]." ".$_REQUEST["lname"]."'s Profile.".";"."http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Stick_Figure.svg/170px-Stick_Figure.svg.png\n";
+		$usercreate = $_REQUEST["user"].";".$_REQUEST["pass"].";".$_REQUEST["fname"].";".$_REQUEST["lname"].";"."white".";".$_REQUEST["user"]."'s Profile.".";"."http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Stick_Figure.svg/170px-Stick_Figure.svg.png\n";
 	}
 	else{
 		$usercreate = $_SESSION["user"].";".$_SESSION["pass"].";".$_REQUEST["fname"].";".$_REQUEST["lname"].";".$_REQUEST["color"].";".$_REQUEST["title"].";".$_REQUEST["img"]."\n";
@@ -214,7 +214,7 @@ function check_user(){
 
 			session_unset();
 			session_destroy();
-			$pagetitle = "Welcome to Music Site";
+			$pagetitle = "Welcome to StreamSpace";
 			$DISPLAYuser = "display:none";
 			$DISPLAYlogin = "display:inline";
 			$color = 'white';
@@ -279,7 +279,7 @@ function check_user(){
 				<td><input type="text" name="title" value="<?=$_SESSION['title']?>"/></td>
 			</tr>
 			<tr>
-				<td>Image:</td>
+				<td>Profile Image:</td>
 				<td><input type="text" name="img" value="<?=$_SESSION['img']?>"/></td>
 			</tr>
 			</table>
