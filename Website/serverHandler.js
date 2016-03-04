@@ -32,3 +32,5 @@ var dispatcher = require('httpdispatcher');
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end('Profile Page');
     });
+    
+    //add other pages here...
