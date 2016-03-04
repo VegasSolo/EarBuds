@@ -19,7 +19,7 @@ var dispatcher = require('httpdispatcher');
     }
 
     //where static files are stored
-    dispatcher.setStatic("../Database/resources");
+    dispatcher.setStatic("../Database");
     
     //login screen
     dispatcher.onGet("/login", function(req,res){
