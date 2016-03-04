@@ -1,4 +1,7 @@
-# SE-Project
+# Software Engineering Project
+# Group #2
+
+## Ear Buds ##
 
 We will be designing a music referral site that doubles as social media. It will be web based that allows users
 to create accounts using a username and password that will be used to favorite certain musical groups. From there, 
