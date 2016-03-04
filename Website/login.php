@@ -7,6 +7,7 @@
 	$IN_A_SESSION = false;
 	$color = "white";
 	
+//PHP Functions /////////////////////////////////////////////////////////////////////
 //read a user from the file into session
 function read_f(){
 	global $userfile,$IN_A_SESSION;
@@ -239,7 +240,7 @@ function check_user(){
 		</form>
 	
 	
-		<div style="<?=$DISPLAYlogin?>">Login:</div><br>
+		<div style="<?=$DISPLAYlogin?>"><b>Login:</b></div><br>
 		<form name="login" style="<?=$DISPLAYlogin?>" action="login.php" method="get">
 			User Name:<input type="text" name="user"/><br>
 			Password: <input type="password" name="pass"/><br>
@@ -248,8 +249,7 @@ function check_user(){
 	
 		<hr>
 		
-		<br>
-		<div style="<?=$DISPLAYlogin?>">Create Account:</div><br>
+		<div style="<?=$DISPLAYlogin?>"><b>Create Account:</b></div><br>
 		<form name="create" style="<?=$DISPLAYlogin?>" action="login.php" method="get">
 			User Name: <input type="text" name="user"/><br>
 			Password:  <input type="password" name="pass"/><br>
@@ -257,9 +257,9 @@ function check_user(){
 			Last Name: <input type="text" name="lname"/><br>
 			<input type="hidden" name="create" value="true">
 			<input type="submit" value="Create"/>
-		</form><br>
+		</form>
 	
-		<div style="<?=$DISPLAYuser?>">Edit User:</div><br>
+		<div style="<?=$DISPLAYuser?>"><b>Edit User:</b></div><br>
 		<form name="edit" action="login.php" style="<?=$DISPLAYuser?>" method="get">
 			<table style="<?=$DISPLAYuser?>">
 			<tr>

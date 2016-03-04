@@ -1,1 +1,1 @@
-nrmize;123;Nick;Mize;white;Nick Mize's Profile.;http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Stick_Figure.svg/170px-Stick_Figure.svg.png
+nrmize;123;Nicholas;Mize;red;yolo;
