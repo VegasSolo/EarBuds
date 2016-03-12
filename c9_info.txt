@@ -27,3 +27,9 @@ git commit -am "filename"   ## commit the added file
 git push                    ## push the commited files to the github repository
 
 git pull                    ## update your c9 with the changes in git
+
+# ------------------------- #
+
+# TO UPDATE MASTER WITH YOUR BRANCH #
+
+git push origin <name>:master ## replace name with your branch
