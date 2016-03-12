@@ -14,6 +14,12 @@ git pull origin master      ## pulls changes from master to your branch
 
 # ------------------------- #
 
+# TO CHANGE BRANCHES IN GIT #
+
+git checkout Branch         ## changes to the 'Branch' branch, case-sensitive, 'master' for master
+
+# ------------------------- #
+
 git add filename            ## after creating new file in C9, add said file to be updated
 
 git commit -am "filename"   ## commit the added file 
@@ -21,3 +27,9 @@ git commit -am "filename"   ## commit the added file
 git push                    ## push the commited files to the github repository
 
 git pull                    ## update your c9 with the changes in git
+
+# ------------------------- #
+
+# TO UPDATE MASTER WITH YOUR BRANCH #
+
+git push origin <name>:master ## replace name with your branch
