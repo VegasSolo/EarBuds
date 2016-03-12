@@ -1,17 +1,12 @@
 /* Hello, World! program in node.js */
 var http = require("http");
-http.createServer(function (req,res) {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Hello World\n');
-}).listen(process.env.PORT, process.env.IP);
-console.log("Hello, World");
+var static = require('node-static');
+var PORT = process.env.PORT;
+var IP = process.env.IP;
+var file = new static.Server();
 
-/*
-var bcrypt = require('bcrypt');
-bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash('B4c0/\/', salt, function(err, hash) {
-        // Store hash in your password DB.
-        console.log(hash);
-    });
-});
-*/
+http.createServer(function (req,res) {
+    file.serve(req,res);
+}).listen(PORT, IP);
+console.log("Server connected at "+IP+";"+PORT);
+
