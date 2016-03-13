@@ -66,7 +66,7 @@
     cb();
   };
   
-  //Get all SESSINS for all movies
+  //Get all SESSIONS for all users
   var sessions = {};
   
   exports.initSESSION = function(req, pre, cb) {

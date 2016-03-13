@@ -1,5 +1,5 @@
-var util = require('util');
-var initreq = require('./initreq.njs');
+
+var initreq = require('./initreq.js');
 var session = {};
 
 exports.serve = function(req,res){
@@ -23,12 +23,16 @@ exports.serve = function(req,res){
     });
 }
 
-function page(req,res,pre,cb){
-    res.writeHead(200, {'content-type': 'text/plain'});
-    res.end('./login.njs'+util.inspect(pre));
-        
-        //CODE GOES HERE
 
+function page(req,res,pre,cb){
+    res.writeHead(400, '404 not found', {'content-type': 'text/html'});
     
+    //VARS
+    var content = '';   //Store html text in this variable that displays at the end
+    
+        //CODE GOES HERE
+        
+        
+    res.end(content);
     cb();
 };
