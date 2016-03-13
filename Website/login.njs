@@ -33,6 +33,10 @@ function page(req,res,pre,cb){
         //CODE GOES HERE
         
         
+        content += '<html><body>\n';
+        content += '<h1>Hello World</h1>\n';
+        content += '</html></body>\n';
+        
     res.end(content);
     cb();
 };
