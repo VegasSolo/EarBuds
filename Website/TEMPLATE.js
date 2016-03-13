@@ -32,17 +32,13 @@ exports.serve = function(req,res){
 
 //Fucntion for creating pages
 function page(req,res,pre,cb){
-    res.writeHead(400, '404 not found', {'content-type': 'text/html'});
-    
     //VARS
     var content = '';   //Store html text in this variable that displays at the end
     
         //CODE GOES HERE
-        pre._REQUEST['yolo'];
-        if(pre._REQUEST['yolo'] == null){
-            
-        }
+
         
+    res.writeHead(200, {'Content-Type': 'text/html'})
     res.end(content);
     cb();
 };
