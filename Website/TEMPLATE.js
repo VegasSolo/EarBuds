@@ -9,13 +9,15 @@ exports.serve = function(req,res){
             initreq.initCOOKIE(req,res,pre,function(){
                 initreq.initREQUEST(req,res,pre,function(){
                     initreq.initSESSION(req,res,pre,function(){
-                        var cookies = [];
-                        for ( var c in pre._COOKIE) {
-                            cookies.push(c + '=' + pre._COOKIE[c]);
-                        }
-                        res.setHeader('Set-Cookie', cookies);
-                        res.writeHead(200, {'Content-Type': 'text/plain'});
-                        res.end(res.content);
+                        page(req,res,pre, function() {
+                            var cookies = [];
+                            for ( var c in pre._COOKIE) {
+                                cookies.push(c + '=' + pre._COOKIE[c]);
+                            }
+                            res.setHeader('Set-Cookie', cookies);
+                            res.writeHead(200, {'Content-Type': 'text/plain'});
+                            res.end(res.content);
+                        });
                     });
                 });
             });

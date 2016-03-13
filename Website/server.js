@@ -1,6 +1,6 @@
 /* Require */
 var http = require("http");
-var login = require("./login.njs");
+var login = require("./login.js");
 var static = require('node-static');
 var url = require('url');
 
@@ -10,7 +10,7 @@ var IP = process.env.IP;
 var file = new static.Server();
 
 http.createServer(function (req,res) {
-    if(url.parse(req.url).pathname == 'login.njs'){
+    if(url.parse(req.url).pathname == '/login.php'){
         login.serve(req,res);
     }
     else{
