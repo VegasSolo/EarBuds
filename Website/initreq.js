@@ -1,3 +1,4 @@
+  //Retrieve GET form
   exports.initGET = function(req, pre, cb) {
     pre._GET = {};
     var urlparts = req.url.split('?');
@@ -11,6 +12,7 @@
     cb();
   };
   
+  //Retrieve POST form
   exports.initPOST = function(req, pre, cb) {
     pre._POST = {};
     var body = '';
@@ -30,6 +32,7 @@
     });
   };
   
+  //Get cookie data
   exports.initCOOKIE = function(req, pre, cb) {
     pre._COOKIE = {};
       if (req.headers.cookie) {
@@ -42,6 +45,7 @@
     cb();
   };
   
+  //Put any forms in REQUEST
   exports.initREQUEST = function(req, pre, cb) {
     pre._REQUEST = {};
       if (pre._GET) {
@@ -62,8 +66,9 @@
     cb();
   };
   
-  /** All the sessions of all the users. */
+  //Get all SESSINS for all movies
   var sessions = {};
+  
   exports.initSESSION = function(req, pre, cb) {
     if ((typeof pre._COOKIE['NODESESSID']) == 'undefined') {
         var pool = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
