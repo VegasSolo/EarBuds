@@ -2,7 +2,7 @@
 	//Nick Mize's Implementation of login screen for website
 	//Define variable
 	$pagetitle = "Welcome to StreamSpace";
-	$userfile = "../Database/account-info.txt";
+	$userfile = "/Database/account-info.txt";
 	$ERRORMSG = "";
 	$IN_A_SESSION = false;
 	$color = "white";
