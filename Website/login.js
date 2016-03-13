@@ -32,7 +32,7 @@ function page(req,res,pre,cb){
     
         //CODE GOES HERE
         
-        content += '<html><body>\n';
+        content += '<html><head></head><body>\n';
         content += '<h1>Hello World</h1>\n';
         content += '</body></html>\n';
         

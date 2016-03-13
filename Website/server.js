@@ -10,7 +10,7 @@ var IP = process.env.IP;
 var file = new static.Server();
 
 http.createServer(function (req,res) {
-    if(url.parse(req.url).pathname == '/login.php'){
+    if(url.parse(req.url).pathname == '/login.js'){
         login.serve(req,res);
     }
     else{
