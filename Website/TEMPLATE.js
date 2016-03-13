@@ -23,7 +23,12 @@ exports.serve = function(req,res){
     });
 }
 
+/*
+    if ((typeof sessions['name']) == 'undefined') ## check if a session named 'name' is made
+    if(pre._REQUEST['name'])                      ## is true if a request named 'name' exists
+*/
 
+//Fucntion for creating pages
 function page(req,res,pre,cb){
     res.writeHead(400, '404 not found', {'content-type': 'text/html'});
     
@@ -31,7 +36,10 @@ function page(req,res,pre,cb){
     var content = '';   //Store html text in this variable that displays at the end
     
         //CODE GOES HERE
-        
+        pre._REQUEST['yolo'];
+        if(pre._REQUEST['yolo'] == null){
+            
+        }
         
     res.end(content);
     cb();
