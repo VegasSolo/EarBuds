@@ -7,6 +7,7 @@ var login = require('./login.njs');
 var admin_index = require('./admin/index.njs');
 var admin_login = require('./admin/login.njs');
 
+<<<<<<< HEAD
 http.createServer(function (req, res) {
     if (url.parse(req.url).pathname == '/main.php') {
         index.serve(req, res);
@@ -18,6 +19,14 @@ http.createServer(function (req, res) {
         admin_login.serve(req, res);
     } else {
         file.serve(req, res);
+=======
+http.createServer(function (req,res) {
+    if(url.parse(req.url).pathname == '/login.php'){
+        login.serve(req,res);
+    }
+    else{
+        file.serve(req,res);
+>>>>>>> 11e4b0c568a56edbbc5e9323410fe5ef0b5d09e8
     }
 }).listen(process.env.PORT, process.env.IP);
 
