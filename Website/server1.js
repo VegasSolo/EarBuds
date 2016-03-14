@@ -23,12 +23,12 @@ app.use(express.static('public'));
 
 //Main page GET
 app.get('/', function(req,res){
-    res.sendFile(__dirname+'/'+'main.html');
+    res.sendFile(__dirname+'/'+'login.html');
 })
 
 //Main page POST
 app.post('/', function(req,res){
-    res.sendFile(__dirname+'/'+'main.html');
+    res.sendFile(__dirname+'/'+'login.html');
 })
 
 //Process login GET
@@ -36,9 +36,12 @@ app.get('/GET_login', function(req,res){
     res.end('Succesfully recieved login request for User:'+req.query.user);
 })
 
+//Process user
+app.get('/user', function(req,res){
+    res.end('Succesfully signed in using GET for user: '+req.query.user);
+})
+
 //server start
 var server = app.listen(PORT, function(){
     console.log('Server listening at http://%s:%s', IP, PORT);
 })
-
-
