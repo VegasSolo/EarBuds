@@ -3,11 +3,15 @@ var http = require("http");
 var fs = require('fs');
 var url = require('url');
 var express = require('express');
+var bodyParser = require('body-parser');
 
 /* Vars */
 var PORT = process.env.PORT;
 var IP = process.env.IP;;
 var app = express();
+
+// Create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 //Get location of static webpage files
 app.use(express.static('public'));
@@ -17,7 +21,7 @@ app.use(express.static('public'));
 **  To add pages to the routing use:
 **  app.get(</page>, function(req,res)){}   **FOR GET
 **  OR
-**  app.post(</page>, function(req,res)){}  **FOR POST
+**  app.post(</page>, urlencodedParser, function(req,res)){}  **FOR POST
 **  -------------------------------------------------------
 */  
 
@@ -27,18 +31,13 @@ app.get('/', function(req,res){
 })
 
 //Main page POST
-app.post('/', function(req,res){
+app.post('/', urlencodedParser, function(req,res){
     res.sendFile(__dirname+'/'+'login.html');
 })
 
-//Process login GET
-app.get('/GET_login', function(req,res){
+//Process login POST
+app.post('/POST_login', urlencodedParser, function(req,res){
     res.end('Succesfully recieved login request for User:'+req.query.user);
-})
-
-//Process user
-app.get('/user', function(req,res){
-    res.end('Succesfully signed in using GET for user: '+req.query.user);
 })
 
 //server start
