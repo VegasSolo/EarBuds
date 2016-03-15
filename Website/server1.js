@@ -4,6 +4,8 @@ var fs = require('fs');
 var url = require('url');
 var express = require('express');
 var bodyParser = require('body-parser');
+var session = require('client-sessions');
+var cookieParser = require('cookie-parser');
 
 /* Vars */
 var PORT = process.env.PORT;
@@ -15,6 +17,17 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 //Get location of static webpage files
 app.use(express.static('public'));
+
+//Initialize cookieParser
+app.use(cookieParser());
+
+//Initialize sessions
+app.use(session({
+    cookieName: 'session', //name of cookie
+    secret: '9t8YCmDaQb9NcznMC0F1', //string key for encryption
+    duration: 2 * 60 * 60 * 1000, //how long the session is active in ms
+    activeDuration: 10 * 60 * 1000 //how long the duration can be extended after use
+}))
 
 /*  
 **  -------------------------------------------------------
@@ -37,7 +50,19 @@ app.post('/', urlencodedParser, function(req,res){
 
 //Process login POST
 app.post('/POST_login', urlencodedParser, function(req,res){
-    res.end('Succesfully recieved login request for User:'+req.query.user);
+    //set user to a session var
+    if(req.session && req.session.user){
+        req.session.user = req.body.user;
+    }
+    else{
+        req.session.user = req.body.user;
+        req.session.fname = req.body.fname;
+        req.session.lname = req.body.lname;
+        req.session.email = req.body.email;
+    }
+        
+    
+    res.end('Succesfully recieved login request for User: '+req.session.user);
 })
 
 //server start
