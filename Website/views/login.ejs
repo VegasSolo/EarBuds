@@ -1,0 +1,48 @@
+<html>
+<body>
+    <form action="https://seproject-ezimkin.c9users.io/POST_login" method="POST" onsubmit="return validate()" name="iform">
+    User Name : <input type="text" name="user" value="Dill"><br>
+    Password  : <input type="password" name="pass" value="123"><br>
+    First Name: <input type='text' name='fname' value='Dillon' id='fname'><br>
+    Last Name: <input type='text' name='lname' value='VanBuskirk' id='lname'><br>
+    E-mail: <input type='text' name='email' value='dtvanbus@uark.edu' id='email'><br>
+    <input type="submit" value="Submit">
+    </form>
+    
+    <script>
+		function validate() {
+			var email = document.forms["iform"]["email"].value
+			if ((document.forms["iform"]["user"].value) == "") {
+				alert('User name cannot be left blank');
+				return false;
+			}
+			if ((document.forms["iform"]["pass"].value) == "") {
+				alert('Password cannot be left blank');
+				return false;
+			}
+			if ((document.forms["iform"]["fname"].value) == "") {
+				alert('First name cannot be left blank');
+				return false;
+			}
+			if ((document.forms["iform"]["lname"].value) == "") {
+				alert('Last name cannot be left blank');
+				return false;
+			}
+			if ((document.forms["iform"]["email"].value) == "") {
+				alert('Email cannot be left blank');
+				return false;
+			}
+			if (email.search("@") < 0) {
+				alert('Email must contain a @');
+				return false;
+			}
+			if (email.indexOf(".") < 0) {
+				alert('Email must contain a .');
+				return false;
+			}
+			return true;
+		}
+	</script>
+    
+</body>
+</html>
