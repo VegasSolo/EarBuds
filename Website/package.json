@@ -7,7 +7,7 @@
     "mongoose" : "latest",          
     "passport" : "latest",         
     "passport-local" : "latest",    
-    "passport-facebook" : "latest"", 
+    "passport-facebook" : "latest", 
     "passport-twitter" : "latest",  
     "passport-google-oauth" : "latest",
     "connect-flash" : "latest",     
