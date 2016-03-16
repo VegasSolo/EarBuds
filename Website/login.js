@@ -9,13 +9,15 @@ exports.serve = function(req,res){
             initreq.initCOOKIE(req,res,pre,function(){
                 initreq.initREQUEST(req,res,pre,function(){
                     initreq.initSESSION(req,res,pre,function(){
-                        var cookies = [];
-                        for ( var c in pre._COOKIE) {
-                            cookies.push(c + '=' + pre._COOKIE[c]);
-                        }
-                        res.setHeader('Set-Cookie', cookies);
-                        res.writeHead(200, {'Content-Type': 'text/plain'});
-                        res.end(res.content);
+                        page(req,res,pre, function() {
+                            var cookies = [];
+                            for ( var c in pre._COOKIE) {
+                                cookies.push(c + '=' + pre._COOKIE[c]);
+                            }
+                            res.setHeader('Set-Cookie', cookies);
+                            res.writeHead(200, {'Content-Type': 'text/plain'});
+                            res.end(res.content);
+                        });
                     });
                 });
             });
@@ -25,14 +27,16 @@ exports.serve = function(req,res){
 
 
 function page(req,res,pre,cb){
-    res.writeHead(400, '404 not found', {'content-type': 'text/html'});
-    
     //VARS
     var content = '';   //Store html text in this variable that displays at the end
     
         //CODE GOES HERE
         
+        content += '<html><head></head><body>\n';
+        content += '<h1>Hello World</h1>\n';
+        content += '</body></html>\n';
         
+    res.writeHead(200, {'Content-Type': 'text/html'})
     res.end(content);
     cb();
 };
