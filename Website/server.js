@@ -41,7 +41,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 //requirements for passport
 app.use(session({
     secret: '9t8YCmDaQb9NcznMC0F1', //string key for encryption
-    maxAge: 60*60*1000,  //expires in an hour
+    //maxAge: 60*60*1000,  //expires in an hour
     resave: false,
     saveUninitialized: true,
     cookie: {secure: true}

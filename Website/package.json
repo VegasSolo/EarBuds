@@ -1,23 +1,22 @@
 {
-  "name": "EarBuds",
-  "version": "0.0.1",
+  "name": "node-authentication",
   "main": "server.js",
-  "dependencies": {
-    "bcrypt-nodejs": "latest",
-    "body-parser": "latest",
-    "connect-flash": "latest",
-    "cookie-parser": "latest",
-    "ejs": "latest",
-    "express": "latest",
-    "express-session": "latest",
-    "method-override": "latest",
-    "mongodb": "latest",
-    "mongoose": "latest",
-    "morgan": "latest",
-    "passport": "latest",
-    "passport-facebook": "latest",
-    "passport-google-oauth": "latest",
-    "passport-local": "latest",
-    "passport-twitter": "latest"
+  "dependencies" : {
+    "express" : "~4.0.0",           
+    "ejs" : "~0.8.5",               
+    "mongoose" : "~3.8.1",          
+    "passport" : "~0.1.17",         
+    "passport-local" : "~0.1.6",    
+    "passport-facebook" : "~1.0.2", 
+    "passport-twitter" : "~1.0.2",  
+    "passport-google-oauth" : "~0.1.5",
+    "connect-flash" : "~0.1.1",     
+    "bcrypt-nodejs" : "latest",
+
+    "morgan": "~1.0.0",
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.0",
+    "method-override": "~1.0.0",
+    "express-session": "~1.0.0"     
   }
 }
