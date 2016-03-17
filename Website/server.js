@@ -1,7 +1,8 @@
 /* Require */
 var express  = require('express');
 var app      = express();
-var port     = process.env.PORT || 8080;
+var port     = process.env.PORT;
+var ip       = process.env.IP;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -41,10 +42,9 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 //requirements for passport
 app.use(session({
     secret: '9t8YCmDaQb9NcznMC0F1', //string key for encryption
-    //maxAge: 60*60*1000,  //expires in an hour
+    maxAge: 60*60*1000,  //expires in an hour
     resave: false,
-    saveUninitialized: true,
-    cookie: {secure: true}
+    saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -58,4 +58,4 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 **  Server Start
 **  -------------------------------------------------------
 */ 
-app.listen(port);
+app.listen(port,ip);
