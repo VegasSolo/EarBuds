@@ -19,10 +19,11 @@ var configDB = require('./config/database.js');
 **  -------------------------------------------------------
 */ 
 
-// require('./config/passport')(passport); // pass passport for configuration
-
 // connect to our database
 mongoose.connect(configDB.url);
+
+// pass passport for configuration
+require('./config/passport')(passport); 
 
 //Get location of static webpage files ~/public/...
 app.use(express.static('public'));
@@ -48,22 +49,6 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 //Get location of routes
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-
-
-/* 
-**  -------------------------------------------------------
-**  Routing Pages
-**  -------------------------------------------------------
-*/ 
-
-
-
-/* 
-**  -------------------------------------------------------
-**  Process Pages
-**  -------------------------------------------------------
-*/ 
-
 
 /* 
 **  -------------------------------------------------------
