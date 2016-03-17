@@ -23,7 +23,7 @@ var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
 
 // pass passport for configuration
-require('./config/passport')(passport); 
+require('./config/passport.js')(passport); 
 
 //Get location of static webpage files ~/public/...
 app.use(express.static('public'));
@@ -31,7 +31,8 @@ app.use(express.static('public'));
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
+app.use(bodyParser.urlencoded()); // get information from html forms
+app.use(bodyParser.json());
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 
