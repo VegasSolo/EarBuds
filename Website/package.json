@@ -1,6 +1,6 @@
 {
   "name": "EarBuds",
-  "version" : "0.0.1",
+  "version": "0.0.1",
   "main": "server.js",
   "dependencies": {
     "bcrypt-nodejs": "latest",
@@ -11,6 +11,7 @@
     "express": "latest",
     "express-session": "latest",
     "method-override": "latest",
+    "mongodb": "^2.1.7",
     "mongoose": "^4.4.7",
     "morgan": "latest",
     "passport": "latest",
