@@ -19,6 +19,18 @@ var configDB = require('./config/database.js');
 **  -------------------------------------------------------
 */ 
 
+/* 
+** -------------------------------------------------------
+** Alternative Mongoose DB Connection
+** -------------------------------------------------------
+var mongoose = require('mongoose');
+
+var db = mongoose.createConnection(
+  'mongodb://<user>:<pass>@jello.modulusmongo.net:27017/xUt8ipam'
+);
+** -------------------------------------------------------
+*/
+
 // connect to our database
 mongoose.connect(configDB.url);
 
