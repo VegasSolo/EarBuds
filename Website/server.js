@@ -1,34 +1,58 @@
-var http = require('http');
-var static = require('node-static');
-var file = new static.Server();
-var url = require('url');
-var index = require('./index.njs');
-var login = require('./login.njs');
-var admin_index = require('./admin/index.njs');
-var admin_login = require('./admin/login.njs');
+/* Require */
+var express  = require('express');
+var app      = express();
+var port     = process.env.PORT || 8080;
+var mongoose = require('mongoose');
+var passport = require('passport');
+var flash    = require('connect-flash');
 
-<<<<<<< HEAD
-http.createServer(function (req, res) {
-    if (url.parse(req.url).pathname == '/main.php') {
-        index.serve(req, res);
-    } else if (url.parse(req.url).pathname == '/login.php') {
-        login.serve(req, res);
-    } else if (url.parse(req.url).pathname == '/admin/index.php') {
-        admin_index.serve(req, res);
-    } else if (url.parse(req.url).pathname == '/admin/login.php') {
-        admin_login.serve(req, res);
-    } else {
-        file.serve(req, res);
-=======
-http.createServer(function (req,res) {
-    if(url.parse(req.url).pathname == '/login.php'){
-        login.serve(req,res);
-    }
-    else{
-        file.serve(req,res);
->>>>>>> 11e4b0c568a56edbbc5e9323410fe5ef0b5d09e8
-    }
-}).listen(process.env.PORT, process.env.IP);
+var morgan       = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser   = require('body-parser');
+var session      = require('express-session');
 
-console.log('Server connected at process.env.IP:process.env.PORT');
-console.log('Server live at https://earbuds-vegassolo.c9users.io');
+var configDB = require('./config/database.js');
+
+/* 
+**  -------------------------------------------------------
+**  Configuration
+**  -------------------------------------------------------
+*/ 
+
+// connect to our database
+mongoose.connect(configDB.url);
+
+// pass passport for configuration
+require('./config/passport')(passport); 
+
+//Get location of static webpage files ~/public/...
+app.use(express.static('public'));
+
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); // get information from html forms
+
+app.set('view engine', 'ejs'); // set up ejs for templating
+
+//requirements for passport
+app.use(session({
+    secret: '9t8YCmDaQb9NcznMC0F1', //string key for encryption
+    maxAge: 60*60*1000,  //expires in an hour
+    resave: false,
+    saveUninitialized: true,
+    cookie: {secure: true}
+}));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+//Get location of routes
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
+/* 
+**  -------------------------------------------------------
+**  Server Start
+**  -------------------------------------------------------
+*/ 
+app.listen(port);
