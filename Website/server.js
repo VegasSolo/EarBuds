@@ -1,7 +1,8 @@
 /* Require */
 var express  = require('express');
 var app      = express();
-var port     = process.env.PORT || 8080;
+var port     = process.env.PORT;
+var ip       = process.env.IP;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -58,4 +59,4 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 **  Server Start
 **  -------------------------------------------------------
 */ 
-app.listen(port);
+app.listen(port,ip);
