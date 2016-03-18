@@ -4,8 +4,15 @@ module.exports = function(app, passport) {
 	// =====================================
 	// HOME PAGE (with login links) ========
 	// =====================================
-	app.get('/', function(req, res) {
+	app.get('/main', function(req, res) {
 		res.render('index.ejs'); // load the index.ejs file
+	});
+	
+	//check when someone tries to visit the main page to see if they are already logged in
+	app.get('/', isLoggedIn, function(req, res) {
+		res.render('profile.ejs', {
+			user : req.user // get the user out of session and pass to template
+		});
 	});
 
 	// =====================================
@@ -70,5 +77,5 @@ function isLoggedIn(req, res, next) {
 		return next();
 
 	// if they aren't redirect them to the home page
-	res.redirect('/');
+	res.redirect('/main');
 }
