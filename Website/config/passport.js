@@ -48,6 +48,8 @@ module.exports = function(passport) {
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({ 'local.email' :  email }, function(err, user) {
+            // filter to check email format
+            var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
             // if there are any errors, return the error
             if (err)
                 return done(err);
@@ -55,6 +57,9 @@ module.exports = function(passport) {
             // check to see if theres already a user with that email
             if (user) {
                 return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+            // check to see if the email is correct format
+            } else if(!filter.test(email)){
+                return done(null, false, req.flash('signupMessage', 'Email format is incorrect'));
             } else {
 
                 // if there is no user with that email
@@ -64,6 +69,9 @@ module.exports = function(passport) {
                 // set the user's local credentials
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password);
+                newUser.local.firstname = req.body.firstname;
+                newUser.local.lastname = req.body.lastname;
+                newUser.local.username = req.body.username;
 
                 // save the user
                 newUser.save(function(err) {
@@ -113,5 +121,4 @@ module.exports = function(passport) {
         });
 
     }));
-
 };
