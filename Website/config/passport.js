@@ -148,34 +148,31 @@ module.exports = function(passport) {
             }
             
             // Check to see if password and password2 from form is the same
-            if (req.body.password == "" && req.body.password2 == ""){
+            if (req.body.password == "empty" && req.body.password2 == "empty"){
                 
-                user.update({ 'local.email' : email}, {
-                    username: req.body.username, 
-                    firstname: req.body.firstname,
-                    lastname: req.body.lastname
-                }); 
+                user.local.username = req.body.username;
+                user.local.firstname = req.body.firstname;
+                user.local.lastname = req.body.lastname;
                 
             } // Check to see if the passwords match
             else if (req.body.password != req.body.password2){
                 return done(null, false, req.flash('editMessage', 'Passwords do not match.'));
             } // If the passwords match, update user
             else{
-                //update the user's local credentials
-                user.update({ 'local.email' : email}, {
-                    username: req.body.username, 
-                    firstname: req.body.firstname,
-                    lastname: req.body.lastname,
-                    password: user.generateHash(req.body.password)
-                }); 
+                
+                
+                user.local.username = req.body.username;
+                user.local.firstname = req.body.firstname;
+                user.local.lastname = req.body.lastname;
+                user.local.password = user.generateHash(req.body.password);
                     
-                }
-            // save the user
-            user.save(function(err) {
-                if (err)
-                    throw err;
-                return done(null, user);
-            }); 
+            }
+                // save the user
+                user.save(function(err) {
+                    if (err)
+                        throw err;
+                    return done(null, user);
+                }); 
             }); 
         }); 
     }));
