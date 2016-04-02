@@ -1,0 +1,17 @@
+1.	Customer’s Request:
+a.	He wants to visit a website that is dedicated to music sharing and friending new people with similar music taste. (EarBuds)
+b.	The customer wants to be taken to a page where he can create an account with his personal information and after registration, be taken to his dashboard.
+c.	The customer wants to be taken to a login page where he logs in with his email and password and then taken to his dashboard.
+d.	The customer wants to have reassurance his personal info is securely stored (database) so that he does not have to create an account each time.
+All the user stories above were successfully completed. It took about roughly 24 hours to create the login, homepage, signup page, dashboard page, and database.  In our requirements specification, we listed it would take 19 hours to complete. It took a few extra hours to figure out because we were trying to decide what framework and language to use and to fix our database. 
+
+2.	XP practices used:
+a.	Pair Programming:  At the start of coding and well after, we coded in pairs since all of us decided to use new languages we never used before. This helped us maximize our thinking and adjusting to the new programming languages. We did run into issues with not knowing why node.js didn’t want to work with PHP and also that mongo wasn’t very user friendly to us in cloud9. To combat this issue, we decided to venture off with other programming languages (JavaScript and mongoose).
+b.	On-site customer: We would visit the customer to get feedback if our design was coming up well. We didn’t have any complications; our customer gave positive feedback and was realistic what he was asking for.
+c.	Continuous integration: As soon as a part of the code was done, it was pushed into the master branch on github. We didn’t have any issues; all of us gave agreement before that individual pushed into the master branch.
+3.	Test Case:
+a.	In the first test case, the server was tested to see if it was successfully connected and see if the user can reach ‘EarBuds’ if they typed the website address https://software-jenlisbeth.c9users.io. The expected output to the test case is that the user would be taken to Earbuds’ main homepage.
+b.	In this test case, the user needed to create an account with their inputted personal info. To know that it worked, the user would be taken to their dashboard and the dashboard would output their information.
+c.	In this test case, the user would input their email and password to login. If successful, the user would be taken to their dashboard with the dashboard outputting their information.
+d.	In this test case, the database was tested. In order to reassure that the database correctly stored personal info, the user is able to successfully login their account, reassuring that their account was successfully stored in the database. Also, the dashboard should output their personal info and not anyone else’s personal info meaning that the database correctly stored everyone’s information and that it wasn’t mixed up.
+
