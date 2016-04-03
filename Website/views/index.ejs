@@ -14,37 +14,52 @@ h1 {
     font-size: 800%;
    
 }
+video{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    min-width:100%;
+    min-height:100%;
+    width:auto;
+    height:auto;
+    z-index:1;
+}
+.text{
+    z-index:2;
+    position:relative;
+    color:#006666;
+}
 
-    body {
-
-    background-image: url(images/bud.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 100%;
-    width:100%;
-    background-size: cover;
-    padding-top:80px;
-    color:black;
-
-    }
-      
     </style>
     </head>
+ <body>
+     
+<div class =container>
+<video width="320" height="240" autoplay="true" loop>
+  <source src="images/welcome.mp4" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+        <div class="text"> 
+         <div style="text-align:center">  
+        <div class="container">
 
-<body>
-<div style="text-align:center">  
-<div class="container">
-
-    <div class>
+        <div class>
         <h1>E a r B u d s</h1>
 
         <p>Login or Register with:</p>
 
         <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login </a>
         <a href="/signup" class="btn btn-default"><span class="fa fa-pencil-square-o"></span> Signup </a>
-    </div>
+        </div>
+        </div>
+        </div>
+        </div>
 
-</div>
-</div>
+</body>
+<body>
+
+
 </body>
 </html>
