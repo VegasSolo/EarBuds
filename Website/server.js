@@ -13,6 +13,7 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 var configDB = require('./config/database.js');
+var mysql    = require('mysql');
 
 /* 
 **  -------------------------------------------------------
@@ -52,6 +53,23 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 //Get location of routes
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
+//setup mysql database
+app.set('views',__dirname + '/views');
+app.use(express.static(__dirname + '/JS'));
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+
+//Connects to artist DB
+var connection = mysql.createConnection({
+host : 'https://'+process.env.IP,
+port : process.env.PORT,
+user : 'root',
+password : '',
+database : 'Artists.sql'
+});
+
+connection.connect();
 
 /* 
 **  -------------------------------------------------------

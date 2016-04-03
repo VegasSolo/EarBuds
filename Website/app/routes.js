@@ -1,4 +1,8 @@
 // app/routes.js
+
+//get the method to connect to search 
+var server            = require('../server');
+
 module.exports = function(app, passport) {
 
 	// =====================================
@@ -67,6 +71,24 @@ module.exports = function(app, passport) {
 		failureRedirect : '/profile',
 		failureFlash : true
 	}));
+	
+	// =====================================
+	// SEARCH ==============================
+	// =====================================
+
+	//Extract the keyword.
+	//Return the result depending on the keyword.
+	app.get('/search',function(req,res){
+		server.query('SELECT first_name from TABLE_NAME where first_name like "%'+req.query.key+'%"',
+		function(err, rows, fields) {
+			if (err) throw err;
+			var data=[],i;
+			for(i=0;i<rows.length;i++) {
+				data.push(rows[i].first_name);
+			}
+			res.end(JSON.stringify(data));
+		});
+	});
 
 	// =====================================
 	// LOGOUT ==============================
