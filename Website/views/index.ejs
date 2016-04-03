@@ -1,26 +1,65 @@
 <!-- views/index.ejs -->
 <!doctype html>
 <html>
-<head>
-    <title>Ear Buds</title>
+    <head>
+    <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+     <title>EarBuds</title>
     <style>
-        body        { padding-top:80px; }
-    </style>
-</head>
-<body>
-<div class="container">
+h1 {
+    color:#006666;
+     font-family: 'Megrim', serif;
+     font-weight: bolder;
+    font-size: 800%;
+   
+}
+video{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    min-width:100%;
+    min-height:100%;
+    width:auto;
+    height:auto;
+    z-index:1;
+}
+.text{
+    z-index:2;
+    position:relative;
+    color:#006666;
+}
 
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span>Ear Buds</h1>
+    </style>
+    </head>
+ <body>
+     
+<div class =container>
+<video width="320" height="240" autoplay="true" loop>
+  <source src="images/welcome.mp4" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+        <div class="text"> 
+         <div style="text-align:center">  
+        <div class="container">
+
+        <div class>
+        <h1>E a r B u d s</h1>
 
         <p>Login or Register with:</p>
 
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
-    </div>
+        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login </a>
+        <a href="/signup" class="btn btn-default"><span class="fa fa-pencil-square-o"></span> Signup </a>
+        </div>
+        </div>
+        </div>
+        </div>
 
-</div>
+</body>
+<body>
+
+
 </body>
 </html>

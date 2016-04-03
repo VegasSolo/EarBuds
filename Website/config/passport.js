@@ -48,6 +48,8 @@ module.exports = function(passport) {
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({ 'local.email' :  email }, function(err, user) {
+            // filter to check email format
+            var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
             // if there are any errors, return the error
             if (err)
                 return done(err);
@@ -55,6 +57,9 @@ module.exports = function(passport) {
             // check to see if theres already a user with that email
             if (user) {
                 return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+            // check to see if the email is correct format
+            } else if(!filter.test(email)){
+                return done(null, false, req.flash('signupMessage', 'Email format is incorrect'));
             } else {
 
                 // if there is no user with that email
@@ -64,6 +69,9 @@ module.exports = function(passport) {
                 // set the user's local credentials
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password);
+                newUser.local.firstname = req.body.firstname;
+                newUser.local.lastname = req.body.lastname;
+                newUser.local.username = req.body.username;
 
                 // save the user
                 newUser.save(function(err) {
@@ -113,4 +121,61 @@ module.exports = function(passport) {
         });
 
     }));
+    
+    // =========================================================================
+    // LOCAL EDIT ==============================================================
+    // =========================================================================
+    // process the information if a user tries to edit his profile info
+    
+    passport.use('local-edit', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function( req, email, password, done) {
+        
+        // asynchronous
+        // User.findOne wont fire unless data is sent back
+        process.nextTick(function() {
+
+        // find a user whose email is the same as the forms email
+        User.findOne({ 'local.email' :  email }, function(err, user) {
+            
+            // if there are any errors, return the error
+            if (err){
+                return done(err);
+            }
+            
+            // Check to see if password and password2 from form is the same
+            if (req.body.password == "empty" && req.body.password2 == "empty"){
+                
+                user.local.username = req.body.username;
+                user.local.firstname = req.body.firstname;
+                user.local.lastname = req.body.lastname;
+                
+            } // Check to see if the passwords match
+            else if (req.body.password != req.body.password2){
+                return done(null, false, req.flash('editMessage', 'Passwords do not match.'));
+            } // If the passwords match, update user
+            else{
+                
+                
+                user.local.username = req.body.username;
+                user.local.firstname = req.body.firstname;
+                user.local.lastname = req.body.lastname;
+                user.local.password = user.generateHash(req.body.password);
+                    
+            }
+                // save the user
+                user.save(function(err) {
+                    if (err)
+                        throw err;
+                    return done(null, user);
+                }); 
+            }); 
+        }); 
+    }));
+    
+    
 };
