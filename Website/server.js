@@ -61,16 +61,17 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 //Connects to artist DB
+/**
 var connection = mysql.createConnection({
 host : process.env.IP,
-port : process.env.PORT,
 socketPath : '~/lib/mysql/socket/mysql.sock',
 user : 'root',
 password : '',
 database : 'Artist'
 });
+**/
 
-connection.connect();
+//connection.connect();
 
 /* 
 **  -------------------------------------------------------
