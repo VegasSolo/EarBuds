@@ -1,12 +1,22 @@
 <!-- views/index.ejs -->
 <!doctype html>
 <html>
-<head>
-    <title>Ear Buds</title>
+    <head>
+    <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+     <title>EarBuds</title>
     <style>
+h1 {
+    color:#006666;
+     font-family: 'Megrim', serif;
+     font-weight: bolder;
+    font-size: 800%;
+   
+}
+
     body {
+
     background-image: url(images/bud.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -14,23 +24,27 @@
     width:100%;
     background-size: cover;
     padding-top:80px;
-}
+    color:black;
+
+    }
       
     </style>
-</head>
+    </head>
+
 <body>
-   
+<div style="text-align:center">  
 <div class="container">
 
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span>Ear Buds</h1>
+    <div class>
+        <h1>E a r B u d s</h1>
 
         <p>Login or Register with:</p>
 
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login </a>
+        <a href="/signup" class="btn btn-default"><span class="fa fa-pencil-square-o"></span> Signup </a>
     </div>
 
+</div>
 </div>
 </body>
 </html>
