@@ -68,15 +68,46 @@
 
     <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
         
-
+                <!-- show any messages that come back with authentication -->
+        <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+        
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
         <a href="#openModal" class="btn btn-default btn-sm">Edit info</a>
         <div id="openModal" class="modalDialog">
         	<div>
         		<a href="#close" title="Close" class="close">X</a>
         		<h2>Edit User</h2>
-        		<p>Insert form here.</p>
+                <form action="/editUser" method="post">
+                    <div class="form-group">
+                        <label>User Name</label>
+                        <input type="text" class="form-control" name="username" value=<%=user.local.username%>>
+                    </div>
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" name="firstname" value=<%=user.local.firstname%>>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" name="lastname" value=<%=user.local.lastname%>>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter new password</label>
+                        <input type="password" class="form-control" name="password" value="empty">
+                    </div>
+                    <div class="form-group">
+                        <label>Re-enter Password</label>
+                        <input type="password" class="form-control" name="password2" value="empty">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="email" value=<%=user.local.email%> >
+                    </div>
+            
+                    <button type="submit" class="btn btn-warning btn-lg">Edit</button>
+                </form>
+                
         	</div>
         </div>
     </div>
@@ -94,7 +125,7 @@
                         <strong>firstname</strong>: <%= user.local.firstname %><br>
                         <strong>lastname</strong>: <%= user.local.lastname %><br>
                         <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
+                        <strong>password</strong>: <br><%= user.local.password %>
                     </p>
 
             </div>
