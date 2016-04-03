@@ -62,11 +62,12 @@ app.engine('html', require('ejs').renderFile);
 
 //Connects to artist DB
 var connection = mysql.createConnection({
-host : 'https://'+process.env.IP,
+host : process.env.IP,
 port : process.env.PORT,
+socketPath : '~/lib/mysql/socket/mysql.sock',
 user : 'root',
 password : '',
-database : 'Artists.sql'
+database : 'Artist'
 });
 
 connection.connect();

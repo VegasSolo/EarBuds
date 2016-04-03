@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS 'Artist';
 
 CREATE TABLE 'Artist' (
-	`ID` int(11) NOT NULL AUTO_INCREMENT,
-	`Name` char(35) NOT NULL DEFAULT '',
+	`ID` INT(11) NOT NULL AUTO_INCREMENT,
+	`Name` VARCHAR(35) NOT NULL DEFAULT '',
 	PRIMARY KEY (`ID`),
-	KEY `Name` (`Name`),
+	KEY `Name` (`Name`)
 );
 
 INSERT INTO 'Artist' VALUES(1,'Lady Gaga');
