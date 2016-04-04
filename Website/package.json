@@ -19,6 +19,7 @@
     "cookie-parser": "latest",
     "method-override": "latest",
     "express-session": "latest",
-    "mysql" : "latest"
+    "mysql" : "latest",
+    "jquery" : "latest"
   }
 }

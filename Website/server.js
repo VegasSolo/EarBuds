@@ -54,23 +54,37 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 //Get location of routes
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-//setup mysql database
-app.set('views',__dirname + '/views');
-app.use(express.static(__dirname + '/JS'));
-app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
+/* 
+**  -------------------------------------------------------
+**  mysql   https://codeforgeek.com/2014/09/ajax-search-box-using-node-mysql/
+**  -------------------------------------------------------
+*/ 
 
 //Connects to artist DB
 var connection = mysql.createConnection({
-host : process.env.IP,
-//socketPath : '~/lib/mysql/socket/mysql.sock',
-user : 'ezimkin',
-password : '',
-database : 'Artist'
+    host : process.env.IP,
+    user : 'ezimkin',   //INSERT YOUR CLOUD 9 USERNAME HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    password : '',
+    database : 'artists'
 });
 
+connection.connect(function(){
+console.log("MySQL Database is Connected");
+});
 
-connection.connect();
+//Search DB for artist
+app.get('/search',function(req,res){
+    console.log('server.js:select Name from artist where Name like "%'+req.query.key+'%"');
+	connection.query('select Name from artist where Name like "%'+req.query.key+'%"',
+	function(err, rows, fields) {
+		if (err) throw err;
+		var data=[];
+		for(var i=0;i<rows.length;i++) {
+			data.push(rows[i].Name);
+		}
+		res.end(JSON.stringify(data));
+	});
+});
 
 /* 
 **  -------------------------------------------------------
@@ -78,3 +92,4 @@ connection.connect();
 **  -------------------------------------------------------
 */ 
 app.listen(port,ip);
+console.log("IP: "+process.env.IP);
