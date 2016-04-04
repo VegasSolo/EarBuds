@@ -74,7 +74,6 @@ console.log("MySQL Database is Connected");
 
 //Search DB for artist
 app.get('/search',function(req,res){
-    console.log('server.js:select Name from artist where Name like "%'+req.query.key+'%"');
 	connection.query('select Name from artist where Name like "%'+req.query.key+'%"',
 	function(err, rows, fields) {
 		if (err) throw err;
