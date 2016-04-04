@@ -68,8 +68,12 @@ var connection = mysql.createConnection({
     database : 'artists'
 });
 
-connection.connect(function(){
-console.log("MySQL Database is Connected");
+connection.connect(function(err){
+    if (err) {
+        console.log("SQL CONNECT ERROR: " + err);
+    } else {
+        console.log("SQL CONNECT SUCCESSFUL.");
+    }
 });
 
 //Search DB for artist
@@ -92,3 +96,4 @@ app.get('/search',function(req,res){
 */ 
 app.listen(port,ip);
 console.log("IP: "+process.env.IP);
+console.log("PORT: "+process.env.PORT);
