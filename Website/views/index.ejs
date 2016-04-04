@@ -44,7 +44,7 @@
         $(document).ready(function(){
             $('input.typeahead').typeahead({
                 name: 'typeahead',
-                remote: 'https://seproject-ezimkin.c9users.io/search?key=%QUERY',
+                remote: 'https://'+window.location.host+'/search?key=%QUERY',
                 limit: 10
             });
         });
