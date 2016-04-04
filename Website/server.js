@@ -56,7 +56,7 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 
 /* 
 **  -------------------------------------------------------
-**  mysql   https://codeforgeek.com/2014/09/ajax-search-box-using-node-mysql/
+**  MYSQL DATABASE CONFIG  
 **  -------------------------------------------------------
 */ 
 
@@ -68,11 +68,20 @@ var connection = mysql.createConnection({
     database : 'artists'
 });
 
+//Connect and update database with artists.sql file
 connection.connect(function(err){
     if (err) {
         console.log("SQL CONNECT ERROR: " + err);
     } else {
         console.log("SQL CONNECT SUCCESSFUL.");
+        connection.query('create database artists;',function(err){
+            if(err)
+            console.log(err);
+        }); 
+        connection.query("source artists.sql",function(err){
+            if(err)
+            console.log(err);
+        });
     }
 });
 
