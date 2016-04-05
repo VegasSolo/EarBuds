@@ -176,6 +176,4 @@ module.exports = function(passport) {
             }); 
         }); 
     }));
-    
-    
 };

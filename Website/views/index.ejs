@@ -124,8 +124,10 @@
                         <h1>E a r B u d s</h1>
                       
                         <div>
-                            <input type="text" style="vertical-align: top" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
-                            <a href="/artist" style="vertical-align: top" class="btn btn-warning btn-lgt"><span class="fa fa-user"></span> Search! </a>
+                            <form action="/artist" method="get">
+                                <input type="text" style="vertical-align: top" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
+                                <button type="submit" style="vertical-align: top" class="btn btn-warning btn-lgt">Search</button>
+                            </form>
                         </div>
                     
                     <p>Login or Register with:</p>
