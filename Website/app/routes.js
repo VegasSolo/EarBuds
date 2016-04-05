@@ -69,6 +69,23 @@ module.exports = function(app, passport) {
 	}));
 
 	// =====================================
+	// ARTIST ===============================
+	// =====================================
+	app.get('/artist', function(req, res) {
+
+		// render the page and pass in any flash data if it exists
+		res.render('artist.ejs', { message: req.flash('searchMessage') });
+	});
+
+	/* add functionality for this ?? FIXME
+	//check if still logged in and process user edit information
+	app.post('/editUser', passport.authenticate('local-edit', {
+		successRedirect : '/profile',
+		failureRedirect : '/profile',
+		failureFlash : true
+	})); */
+
+	// =====================================
 	// LOGOUT ==============================
 	// =====================================
 	app.get('/logout', function(req, res) {
