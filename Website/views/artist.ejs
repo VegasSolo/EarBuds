@@ -1,13 +1,8 @@
-<script>
-  // add typeahead for this page? 
-  // and fix the fucking css. shits ugly.
-  
-  
-  // NOT RETURNING ALBUMS? *needtofix* FIXME
-</script>
-
 <html>
     <head>
+        <script type='text/javascript' src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+        <script type='text/javascript' src="//developer.spotify.com/web-api/static/css/cached.css"></script>
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
@@ -35,7 +30,27 @@
     <div style="background-image:url({{images.0.url}})" data-album-id="{{id}}" class="cover"></div>
     {{/each}}
   </script>
+  <div class="home">
+      <p>Or go <a href="/">home</a>.</p>
+  </div>
+    <div class="wrapper">
+        <script>
+            var SpotifyWebApi = require('spotify-web-api-node');
 
+            var spotifyApi = new SpotifyWebApi();
+            
+            document.getElementById('search-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                spotifyApi.getArtist(document.getElementById('query').value)
+                    .then(function(data) {
+                    console.log('Artist information', data.body);
+                    }, function(err) {
+                    console.error(err);
+                    });
+            }, false);
+        </script>
+        <p>After wrapper</p>
+    </div>
 
 <style> 
   body {
