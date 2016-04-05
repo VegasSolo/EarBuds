@@ -13,6 +13,7 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 var configDB = require('./config/database.js');
+var mysql    = require('mysql');
 
 /* 
 **  -------------------------------------------------------
@@ -55,7 +56,45 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 
 /* 
 **  -------------------------------------------------------
+**  MYSQL DATABASE CONFIG  
+**  -------------------------------------------------------
+*/ 
+
+//Connects to artist DB
+var connection = mysql.createConnection({
+    host : process.env.IP,
+    user : 'vegassolo',   //INSERT YOUR CLOUD 9 USERNAME HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    password : '',
+    database : 'artists'
+});
+
+//Connect and update database with artists.sql file
+connection.connect(function(err){
+    if (err) {
+        console.log("SQL CONNECT ERROR: " + err);
+    } else {
+        console.log("SQL CONNECT SUCCESSFUL.");
+    }
+});
+
+//Search DB for artist
+app.get('/search',function(req,res){
+	connection.query('select Name from artist where Name like "%'+req.query.key+'%"',
+	function(err, rows, fields) {
+		if (err) throw err;
+		var data=[];
+		for(var i=0;i<rows.length;i++) {
+			data.push(rows[i].Name);
+		}
+		res.end(JSON.stringify(data));
+	});
+});
+
+/* 
+**  -------------------------------------------------------
 **  Server Start
 **  -------------------------------------------------------
 */ 
 app.listen(port,ip);
+console.log("IP: "+process.env.IP);
+console.log("PORT: "+process.env.PORT);
