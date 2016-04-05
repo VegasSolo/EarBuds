@@ -74,14 +74,6 @@ connection.connect(function(err){
         console.log("SQL CONNECT ERROR: " + err);
     } else {
         console.log("SQL CONNECT SUCCESSFUL.");
-        connection.query('create database artists;',function(err){
-            if(err)
-            console.log(err);
-        }); 
-        connection.query("source artists.sql",function(err){
-            if(err)
-            console.log(err);
-        });
     }
 });
 
