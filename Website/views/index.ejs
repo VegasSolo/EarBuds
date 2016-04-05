@@ -6,12 +6,15 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
     <title>Welcome to EarBuds!</title>
+    
     <style>
         h1 {
             color:#006666;
             font-family: 'Megrim', serif;
             font-weight: bolder;
             font-size: 800%;
+            text-shadow: -1px 0px 1px #006666, 0px 1px 1px #006666, 1px 0px 1px #006666, 0px -1px 1px #006666;
+        
         }
         video{
             position:absolute;
@@ -29,37 +32,22 @@
             position:relative;
             color:#006666;
         }
-        .stroke{
-            color: #fff;
-            text-shadow: -1px 0px 1px black, 0px 1px 1px black, 1px 0px 1px black, 0px -1px 1px black;
-            -webkit-font-smoothing: antialiased;
-        }
+     
     </style>
     
-        <script type="text/javascript" src="JS/jquery.min.js"></script>
-        <script type="text/javascript" src="JS/typeahead.min.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function(){
-            $('input.typeahead').typeahead({
-                name: 'typeahead',
-                remote: 'https://'+window.location.host+'/search?key=%QUERY',
-                limit: 10
-            });
-        });
-        </script>
-        
-    <style type="text/css">
+     <style type="text/css">
         .bs-example{
         	font-family: sans-serif;
         	position: relative;
         	margin: 20px;
         	z-index: 3;
+        
         }
         .typeahead, .tt-query, .tt-hint {
         	border: 2px solid #CCCCCC;
-        	border-radius: 6px;
+        	border-radius: 6px; 
         	font-size: 16px;
-        	height: 30px;
+        	height: 32px;    
         	line-height: 30px;
         	outline: medium none;
         	padding: 4px 12px;
@@ -85,6 +73,7 @@
         	margin-top: 12px;
         	padding: 8px 0;
         	width: 422px;
+        	
         }
         .tt-suggestion {
         	font-size: 24px;
@@ -99,57 +88,59 @@
         	margin: 0;
         }
     </style>
-        
-    </head>
-
- <body>
-     
-<div class =container>
     
-<video width="320" height="240" autoplay="true" loop>
-  <source src="images/welcome.mp4" type="video/mp4">
-  <source src="movie.ogg" type="video/ogg">
-  Your browser does not support the video tag.
-</video>
+    <!--JAVASCRIPT-->  
+        <script type="text/javascript" src="JS/jquery.min.js"></script>
+        <script type="text/javascript" src="JS/typeahead.min.js"></script>
+        
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('input.typeahead').typeahead({
+                name: 'typeahead',
+                remote: 'https://'+window.location.host+'/search?key=%QUERY',
+                limit: 10
+            });
+        });
+        </script>
+     <!--END OF JAVASCRIPT-->    
+  </head>
 
 <body>
     <div class="container">
+        
         <video width="320" height="240" autoplay="true" loop>
         <source src="images/welcome.mp4" type="video/mp4">
         <source src="movie.ogg" type="video/ogg">
         Your browser does not support the video tag.
         </video>
     
-
-        <div class="text"> 
+         <div class="text"> 
             <div style="text-align:center">  
                 <div class="container">
-
-
-        <p>Login or Register with:</p>
-
-        <a href="/login" class="btn btn-warning btn-lg"><span class="fa fa-user"></span> Login </a>
-        <a href="/signup" class="btn btn-warning btn-lg"><span class="fa fa-pencil-square-o"></span> Signup </a>
-        </div>
-        </div>
-
-                    <div class="stroke">
-                        <h1>E a r B u d s</h1>
-                    </div>
+                     
                     
-                    <div class="bs-example">
+
+                    
+                        <h1>E a r B u d s</h1>
+                      
+                    
+                        <div class="bs-example">
                         <input type="text" name="typeahead" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Search Artists">
-                        <a href="/artist" class="btn btn-default"><span class="fa fa-user"></span> Search! </a>
-                    </div>
+                        <a href="/artist" class="btn btn-warning btn-lgt"><span class="fa fa-user"></span> Search! </a>
+                        </div>
                     
                     <p>Login or Register with:</p>
             
-                    <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login </a>
-                    <a href="/signup" class="btn btn-default"><span class="fa fa-pencil-square-o"></span> Signup </a>
+                    <a href="/login" class="btn btn-warning btn-lgt"><span class="fa fa-user"></span> Login </a>
+                    <a href="/signup" class="btn btn-warning btn-lgt"><span class="fa fa-pencil-square-o"></span> Signup </a>
                 </div>
             </div>
 
         </div>
     </div>
+ 
+ 
+ 
+    
 </body>
 </html>
