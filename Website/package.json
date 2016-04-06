@@ -1,25 +1,25 @@
 {
   "name": "node-authentication",
   "main": "server.js",
-  "dependencies" : {
-    "express" : "latest",           
-    "ejs" : "latest",               
-    "mongoose" : "latest", 
-    "mongodb": "latest",
-    "passport" : "latest",         
-    "passport-local" : "latest",    
-    "passport-facebook" : "latest", 
-    "passport-twitter" : "latest",  
-    "passport-google-oauth" : "latest",
-    "connect-flash" : "latest",     
-    "bcrypt-nodejs" : "latest",
-
-    "morgan": "latest",
+  "dependencies": {
+    "bcrypt-nodejs": "latest",
     "body-parser": "latest",
+    "connect-flash": "latest",
     "cookie-parser": "latest",
-    "method-override": "latest",
+    "ejs": "latest",
+    "express": "latest",
     "express-session": "latest",
-    "mysql" : "latest",
-    "jquery" : "latest"
+    "jquery": "latest",
+    "method-override": "latest",
+    "mongodb": "latest",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "mysql": "latest",
+    "passport": "latest",
+    "passport-facebook": "latest",
+    "passport-google-oauth": "latest",
+    "passport-local": "latest",
+    "passport-twitter": "latest",
+    "spotify-web-api-node": "^2.3.0"
   }
 }
