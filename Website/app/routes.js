@@ -75,7 +75,7 @@ module.exports = function(app, passport) {
 	app.get('/artist', function(req, res) {
 		res.render('artist.ejs', { 
 			user : req.user, 
-			typeahead : req.body.typeahead
+			typeahead : req.query.typeahead
 		});
 	});
 
