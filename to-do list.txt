@@ -1,7 +1,6 @@
 # To Do List. If you are working on a task, place your name in front of it. Do not push to master until it is complete. #
 
 - Fix formatting & presentation (especially on artist.ejs page)
-- Set the index.ejs search bar search function so that when it transfers to artist.ejs page it should auto-populate that search bar w/ what was in index's search
 - (Optional) Add typeahead functionality to artist.ejs
 - Add MANY more artists into artist.sql database (hundreds)
 - [Osvaldo] Spotify ACCOUNT integration (this should allow us to use Facebook integration and such through them as well)
