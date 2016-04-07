@@ -10,5 +10,5 @@
 - Update user profile page to look cleaner (hide some of the useless information)
 - Add to user profile page a area that displays what artists they like and another area for friends
 - Add recommendation engine option for each artist (example code exists -- Dillon has it, ask him)
-- more?
-- feel free to add. 
+- Menu bar for navigation
+- Bar on bottom that shows where you are in the song (like Soundcloud)
