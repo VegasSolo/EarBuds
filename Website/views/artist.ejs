@@ -7,37 +7,43 @@
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    
     <title>Welcome to EarBuds!</title>
 
     <style>
             h1 {
                 color:#006666;
-                font-family: 'Megrim', serif;
+                font-family: 'Megrim', sans-serif;
                 font-weight: bolder;
                 font-size: 200%;
-                text-align: right;
+                
             }
     </style>
 
-    <div class="container">
-      <h1>Search for another Artist</h1>
-      <form id="search-form">
-        <input type="text" id="query" class="form-control" placeholder="Type an Artist Name" value="<%=typeahead%>"/>
-        <input type="submit" id="search" class="btn btn-primary" value="Search" />
-      </form>
-      <div id="results"></div>
-    </div>
+
+  <div class="container">
+    <h1>Search for another Artist</h1>
+    <form id="search-form">
+      <input type="text" id="query" value="" class="form-control" placeholder="Type an Artist Name" />
+      <input type="submit" id="search" class="btn btn-warning btn-lgt" value="Search" />
+    </form>
+       <div class="home">
+      <p>Or go <a href="/">home</a>.</p>
+  </div>
+    <div id="results"></div>
+    
+  </div>
+
   </head>
     
 <body>
+
   <script id="results-template" type="text/x-handlebars-template">
     {{#each albums.items}}
     <div style="background-image:url({{images.0.url}})" data-album-id="{{id}}" class="cover"></div>
     {{/each}}
   </script>
-  <div class="home">
-      <p>Or go <a href="/">home</a>.</p>
-  </div>
+  
     <div class="wrapper">
         <script>
             var SpotifyWebApi = require('spotify-web-api-node');
