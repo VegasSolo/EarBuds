@@ -67,6 +67,13 @@ module.exports = function(app, passport) {
 		failureRedirect : '/profile',
 		failureFlash : true
 	}));
+	
+	//change the profile image
+	app.post('/imgUsr', passport.authenticate('local-edit', {
+		successRedirect : '/profile',
+		failureRedirect : '/profile',
+		failureFlash : true
+	}));
 
 	// =====================================
 	// ARTIST ==============================
