@@ -63,20 +63,73 @@
     
     	.close:hover { background: #00d9ff; }
 	</style>
+	<style>
+        .bs-example{
+        	font-family: sans-serif;
+        	position: relative;
+        	float: left;
+        	z-index: 3;
+        
+        }
+        .typeahead, .tt-query, .tt-hint {
+        	border: 2px solid #CCCCCC;
+        	border-radius: 6px; 
+        	font-size: 16px;
+        	height: 32px;    
+        	line-height: 30px;
+        	outline: medium none;
+        	padding: 4px 12px;
+        	width: 422px;
+        }
+        .typeahead {
+        	background-color: #FFFFFF;
+        }
+        .typeahead:focus {
+        	border: 2px solid #0097CF;
+        }
+        .tt-query {
+        	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        }
+        .tt-hint {
+        	color: #999999;
+        }
+        .tt-dropdown-menu {
+        	background-color: #FFFFFF;
+        	border: 1px solid rgba(0, 0, 0, 0.2);
+        	border-radius: 8px;
+        	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        	margin-top: 12px;
+        	padding: 8px 0;
+        	width: 422px;
+        	
+        }
+        .tt-suggestion {
+        	font-size: 24px;
+        	line-height: 24px;
+        	padding: 3px 20px;
+        }
+        .tt-suggestion.tt-is-under-cursor {
+        	background-color: #0097CF;
+        	color: #FFFFFF;
+        }
+        .tt-suggestion p {
+        	margin: 0;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
 
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <h1><span class="fa fa-headphones"></span> Profile Page</h1>
         
                 <!-- show any messages that come back with authentication -->
         <% if (typeof message !== 'undefined' && message.length > 0) { %>
             <div class="alert alert-danger"><%= message %></div>
         <% } %>
         
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-        <a href="#openModal" class="btn btn-default btn-sm">Edit info</a>
+        <a href="/logout" class="btn btn-warning btn-lgt">Logout</a>
+        <a href="#openModal" class="btn btn-warning btn-lgt">Edit info</a>
         <div id="openModal" class="modalDialog">
         	<div>
         		<a href="#close" title="Close" class="close">X</a>
@@ -111,18 +164,42 @@
                 
         	</div>
         </div>
+        <div>
+            <form action="/artist" method="get">
+                <input type="text" style="vertical-align: bottom" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
+                <button type="submit" style="vertical-align: bottom" class="btn btn-warning btn-lgt">Search</button>
+            </form>
+        </div>
     </div>
+    
+        <script type="text/javascript" src="JS/jquery.min.js"></script>
+        <script type="text/javascript" src="JS/typeahead.min.js"></script>
+            
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('input.typeahead').typeahead({
+                    name: 'typeahead',
+                    remote: 'https://'+window.location.host+'/search?key=%QUERY',
+                    limit: 10
+                });
+            });
+        </script>
 
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6">
             <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+                <h3><span class="fa fa-user"></span><%=user.local.username%></h3>
 
+                    <img src="avatar/default.png" alt="avatar" height="200" width="200"> 
+                    <form action="demo_form.asp">
+                        <input type="file" name="pic" accept="image/*">
+                        <input type="submit">
+                    </form> 
+                    
                     <p>
                         <strong>id</strong>: <%= user._id %><br>
-                        <strong>username</strong>: <%= user.local.username %><br>
                         <strong>firstname</strong>: <%= user.local.firstname %><br>
                         <strong>lastname</strong>: <%= user.local.lastname %><br>
                         <strong>email</strong>: <%= user.local.email %><br>
