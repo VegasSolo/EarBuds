@@ -21,5 +21,7 @@
     "passport-local": "latest",
     "passport-twitter": "latest",
     "spotify-web-api-node": "^2.3.0"
+    "querystring": "latest",
+    "request": "latest"
   }
 }
