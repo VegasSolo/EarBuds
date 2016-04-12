@@ -67,6 +67,7 @@ module.exports = function(passport) {
                 var newUser            = new User();
 
                 // set the user's local credentials
+                newUser.local.imgurl   = "avatar/default.png";
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password);
                 newUser.local.firstname = req.body.firstname;
@@ -150,6 +151,7 @@ module.exports = function(passport) {
             // Check to see if password and password2 from form is the same
             if (req.body.password == "empty" && req.body.password2 == "empty"){
                 
+                user.local.imgurl = req.body.imgurl;
                 user.local.username = req.body.username;
                 user.local.firstname = req.body.firstname;
                 user.local.lastname = req.body.lastname;
@@ -160,7 +162,7 @@ module.exports = function(passport) {
             } // If the passwords match, update user
             else{
                 
-                
+                user.local.imgurl = req.body.imgurl;
                 user.local.username = req.body.username;
                 user.local.firstname = req.body.firstname;
                 user.local.lastname = req.body.lastname;
