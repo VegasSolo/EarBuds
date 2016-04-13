@@ -9,7 +9,6 @@ CREATE TABLE `artist` (
 	`Name` TEXT
 );
 
-
 -- Dump data 
 -- order by `ID`
 
@@ -135,5 +134,16 @@ INSERT INTO `artist` (ID,Name) VALUES (null,'The Strokes');
 INSERT INTO `artist` (ID,Name) VALUES (null,'Panic! At The Disco');
 INSERT INTO `artist` (ID,Name) VALUES (null,'The Fray');
 INSERT INTO `artist` (ID,Name) VALUES (null,'Young the Giant');
-INSERT INTO `artist` (ID,Name) VALUES (null,'Fun.');
+INSERT INTO `artist` (ID,Name) VALUES (null,'Fun');
 COMMIT;
+
+DROP SCHEMA IF EXISTS favorites;
+CREATE SCHEMA favorites;
+
+DROP TABLE IF EXISTS `favorite`;
+
+CREATE TABLE `favorite` (
+	`ID` INT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`User` TEXT,
+	`Bands` TEXT
+);

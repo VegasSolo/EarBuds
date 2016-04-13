@@ -90,6 +90,21 @@ app.get('/search',function(req,res){
 	});
 });
 
+//Add artist to user's liked artists
+app.get('/fave',function(req,res){
+    //Insert fave
+	connection.query('INSERT INTO favorite (ID,User,Bands) SELECT * FROM ( SELECT null,"%'+req.user.local.username+'%","%'+req.query.fave+'%") AS tmp WHERE NOT EXISTS (SELECT User FROM favorite WHERE User = "%'+req.user.local.username+'%") LIMIT 1;',
+	function(err){
+	    if (err) throw err;
+	});
+	//Update faves
+
+	res.render('artist.ejs', { 
+		user : req.user, 
+		typeahead : req.query.fave
+	});
+});
+
 /* 
 **  -------------------------------------------------------
 **  Server Start

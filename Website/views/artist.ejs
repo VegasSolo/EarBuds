@@ -16,6 +16,12 @@
               font-weight: bolder;
               font-size: 200%;
             }
+        .text {
+              color:#006666;
+              font-family: sans-serif;
+              font-weight: bolder;
+              font-size: 150%;
+            }
             
         /*CSS for album artwork! Do not modify!*/    
         body {
@@ -43,8 +49,16 @@
       <% if (typeof user !== 'undefined') { %>
       <div class="col-sm-2" style="float:right">
         <div class="well" style="float:right">
-          <img src="<%=user.local.imgurl%>" alt="avatar" style="border-radius: 6px" height="150" width="150">
-          <a href="/logout" class="btn btn-warning btn-lgt">Logout</a>
+          <p class="text"><%=user.local.username%></p>
+          <img src="<%=user.local.imgurl%>" alt="avatar" style="border-radius: 6px" height="150" width="150"><br>
+            <form action="/fave" method="GET">
+              <div class="form-group">
+                <label class="text">Favorite Artist</label>
+                <input type="text" class="form-control" name="fave" value="<%=typeahead%>">
+                <button type="submit" class="btn btn-warning btn-lgt">Favorite</button>
+              </div>
+              <a href="/logout" class="btn btn-warning btn-lgt">Logout</a>
+            </form>
         </div>
       </div>
       <% } else { %>
