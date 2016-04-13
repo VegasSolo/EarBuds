@@ -98,7 +98,8 @@ app.get('/fave',function(req,res){
 	    if (err) throw err;
 	});
 	//Update faves
-
+    connection.query('UPDATE favorite SET Bands = Bands + "%'+","+req.query.fave+'%" WHERE User = "%'+req.user.local.username+'%"');
+    
 	res.render('artist.ejs', { 
 		user : req.user, 
 		typeahead : req.query.fave
