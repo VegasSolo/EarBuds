@@ -92,24 +92,15 @@ app.get('/search',function(req,res){
 
 //Add artist to user's liked artists
 app.get('/fave',function(req,res){
-	
     //Insert fave
 	connection.query('INSERT INTO favorite (ID,User,Bands) SELECT * FROM ( SELECT null,"'+req.user.local.username+'","'+req.query.fave+'") AS tmp WHERE NOT EXISTS (SELECT User FROM favorite WHERE User = "'+req.user.local.username+'") LIMIT 1',
 	function(err){
 	    if (err) throw err;
 	});
-	//Update faves
-	connection.query('select Bands from favorite where User = "'+req.user.local.username+'"', 
-	function(err, result, field) {
+	//Update faves and check if artist is already favorited
+	connection.query('UPDATE favorite SET Bands = CONCAT(Bands, ",'+req.query.fave+'") WHERE User = "'+req.user.local.username+'" AND Bands NOT LIKE "%'+req.query.fave+'%"',
+	function(err) {
 		if(err) throw err;
-		for(var i = 0; i < result.length; i++) {
-			if(req.query.fave == result[i]){
-				//already in favorites
-				connection.query('UPDATE favorite SET Bands = CONCAT(Bands, "yolo") WHERE User = "'+req.user.local.username+'"');
-			}
-			//else
-				//connection.query('UPDATE favorite SET Bands = CONCAT(Bands, "'+','+req.query.fave+'") WHERE User = "'+req.user.local.username+'"');
-		}
 	});
 	
 	res.render('artist.ejs', { 
