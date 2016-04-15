@@ -92,7 +92,7 @@ app.get('/search',function(req,res){
 
 //Add artist to user's liked artists
 app.get('/fave',function(req,res){
-    //Insert fave
+    //Create fave
 	connection.query('INSERT INTO favorite (ID,User,Bands) SELECT * FROM ( SELECT null,"'+req.user.local.email+'","'+req.query.fave+'") AS tmp WHERE NOT EXISTS (SELECT User FROM favorite WHERE User = "'+req.user.local.email+'") LIMIT 1',
 	function(err){
 	    if (err) throw err;
@@ -108,6 +108,12 @@ app.get('/fave',function(req,res){
 		typeahead : req.query.fave
 	});
 });
+
+//Remove the artist from user's liked artists if exists
+app.get('/unfave',function(req,res){
+	
+});
+
 
 /* 
 **  -------------------------------------------------------
