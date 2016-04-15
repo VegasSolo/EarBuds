@@ -112,6 +112,10 @@ app.get('/fave',function(req,res){
 //Remove the artist from user's liked artists if exists
 app.get('/unfave',function(req,res){
 	
+	res.render('artist.ejs', { 
+		user : req.user, 
+		typeahead : req.query.unfave
+	});
 });
 
 

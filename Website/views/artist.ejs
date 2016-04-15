@@ -57,8 +57,15 @@
                 <input type="text" class="form-control" name="fave" value="<%=typeahead%>">
                 <button type="submit" class="btn btn-warning btn-lgt">Favorite</button>
               </div>
-              <a href="/logout" class="btn btn-warning btn-lgt">Logout</a>
             </form>
+            <form action="/unfave" method="GET">
+              <div class="form-group">
+                <label class="text">UnFavorite Artist</label>
+                <input type="text" class="form-control" name="unfave" value="<%=typeahead%>">
+                <button type="submit" class="btn btn-warning btn-lgt">UnFavorite</button>
+              </div>
+            </form>
+            <a href="/logout" class="btn btn-warning btn-lgt">Logout</a>
         </div>
       </div>
       <% } else { %>
