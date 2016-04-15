@@ -93,12 +93,12 @@ app.get('/search',function(req,res){
 //Add artist to user's liked artists
 app.get('/fave',function(req,res){
     //Insert fave
-	connection.query('INSERT INTO favorite (ID,User,Bands) SELECT * FROM ( SELECT null,"'+req.user.local.username+'","'+req.query.fave+'") AS tmp WHERE NOT EXISTS (SELECT User FROM favorite WHERE User = "'+req.user.local.username+'") LIMIT 1',
+	connection.query('INSERT INTO favorite (ID,User,Bands) SELECT * FROM ( SELECT null,"'+req.user.local.email+'","'+req.query.fave+'") AS tmp WHERE NOT EXISTS (SELECT User FROM favorite WHERE User = "'+req.user.local.email+'") LIMIT 1',
 	function(err){
 	    if (err) throw err;
 	});
 	//Update faves and check if artist is already favorited
-	connection.query('UPDATE favorite SET Bands = CONCAT(Bands, ",'+req.query.fave+'") WHERE User = "'+req.user.local.username+'" AND Bands NOT LIKE "%'+req.query.fave+'%"',
+	connection.query('UPDATE favorite SET Bands = CONCAT(Bands, ",'+req.query.fave+'") WHERE User = "'+req.user.local.email+'" AND Bands NOT LIKE "%'+req.query.fave+'%"',
 	function(err) {
 		if(err) throw err;
 	});
