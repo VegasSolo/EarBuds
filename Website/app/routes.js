@@ -19,14 +19,14 @@ module.exports = function(app, passport) {
 	// LOGIN ===============================
 	// =====================================
 	// show the login form
-	app.get('/login', function(req, res) {
+	app.get('/login', isLoggedInProfile, function(req, res) {
 
 		// render the page and pass in any flash data if it exists
 		res.render('login.ejs', { message: req.flash('loginMessage') });
 	});
 
 	// process the login form
-	app.post('/login', passport.authenticate('local-login', {
+	app.post('/login',passport.authenticate('local-login', {
 		successRedirect : '/profile', // redirect to the secure profile section
 		failureRedirect : '/login', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
@@ -36,7 +36,7 @@ module.exports = function(app, passport) {
 	// SIGNUP ==============================
 	// =====================================
 	// show the signup form
-	app.get('/signup', function(req, res) {
+	app.get('/signup', isLoggedInProfile, function(req, res) {
 
 		// render the page and pass in any flash data if it exists
 		res.render('signup.ejs', { message: req.flash('signupMessage') });
@@ -95,7 +95,7 @@ module.exports = function(app, passport) {
 	});
 };
 
-// route middleware to make sure
+// route middleware to make sure user is logged in
 function isLoggedIn(req, res, next) {
 
 	// if user is authenticated in the session, carry on
@@ -104,4 +104,13 @@ function isLoggedIn(req, res, next) {
 
 	// if they aren't redirect them to the home page
 	res.redirect('/main');
+}
+
+// route user to profile page instead of requested page if logged in
+function isLoggedInProfile(req, res, next) {
+
+	if (req.isAuthenticated())
+		res.redirect('/profile');
+	else
+		return next();
 }

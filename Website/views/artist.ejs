@@ -40,6 +40,24 @@
           /*End of Album artwork code*/  
   </style>
   
+      <!-- User Box only appears when logged In -->
+      <% if (typeof user !== 'undefined') { %>
+      <div class="col-sm-2" style="float:right">
+        <div class="well" style="float:right">
+          <img src="<%=user.local.imgurl%>" alt="avatar" style="border-radius: 6px" height="150" width="150">
+          <a href="/logout" class="btn btn-warning btn-lgt">Logout</a>
+        </div>
+      </div>
+      <% } else { %>
+      <div class="col-sm-2" style="float:right">
+        <div class="well" style="float:right">
+          <a href="/login" class="btn btn-warning btn-lgt"><span class="fa fa-user"></span> Login </a>
+          
+          <a href="/signup" class="btn btn-warning btn-lgt"><span class="fa fa-pencil-square-o"></span> Signup </a>
+        </div>
+      </div>
+      <% } %>
+  
   <div class="container">
       <h1>Search for another Artist</h1>
       <form id="search-form">
@@ -52,8 +70,9 @@
       <div id="results"></div>
   </div>
   
-</head>
+  </head>
   <body>
+    
   <!--Javascript code-->
   <script id="results-template" type="text/x-handlebars-template">
   {{#each albums.items}}
