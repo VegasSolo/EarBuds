@@ -3,11 +3,32 @@
 <html>
 <head>
     <title>Ear Buds</title>
+    <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 
     <style>
         body        { padding-top:80px; word-wrap:break-word; }
+
+        h1 {
+            color:#006666;
+            font-family: 'Megrim', sans-serif;
+            font-weight: bolder;
+            font-size: 400%;
+        }
+        h2 {
+              color:#006666;
+              font-family: sans-serif;
+              font-weight: bolder;
+              text-align: center;
+        }
+        
+        .img {
+              border-radius: 6px; 
+              border: 1px solid black ;   
+              max-width:100%; 
+              max-height:100%;
+        }
         
     	.modalDialog {
     		position: fixed;
@@ -119,14 +140,8 @@
 </head>
 <body>
 <div class="container">
-
+            <h1 style="text-align: center">Profile Page</h1>
     <div class="page-header text-center">
-        <h1><span class="fa fa-headphones"></span> Profile Page</h1>
-        
-                <!-- show any messages that come back with authentication -->
-        <% if (typeof message !== 'undefined' && message.length > 0) { %>
-            <div class="alert alert-danger"><%= message %></div>
-        <% } %>
         
         <a href="/logout" class="btn btn-warning btn-lgt">Logout</a>
         <a href="#openModal" class="btn btn-warning btn-lgt">Edit info</a>
@@ -174,6 +189,10 @@
                 <button type="submit" style="vertical-align: bottom" class="btn btn-warning btn-lgt">Search</button>
             </form>
         </div>
+            <!-- show any messages that come back with authentication -->
+            <% if (typeof message !== 'undefined' && message.length > 0) { %>
+                <div class="alert alert-danger"><%= message %></div>
+            <% } %>
     </div>
     
         <script type="text/javascript" src="JS/jquery.min.js"></script>
@@ -189,26 +208,30 @@
             });
         </script>
 
-    <div class="row">
-
+    <div class="container">
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span><%=user.local.username%></h3>
-
-                    <img src="<%=user.local.imgurl%>" alt="avatar" height="200" width="200"> 
-                    
+        <div class="col-sm-5 well" style="float: left">
+            <h2><span class="fa fa-user"></span><%=user.local.username%></h2>
+                <div class="col-sm-4" style="margin-left: 5%">
+                    <img src="<%=user.local.imgurl%>" alt="avatar" class="img"> 
+                </div>
+                
+                <div class="col-sm-6" style="margin-left: 5%">
                     <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>firstname</strong>: <%= user.local.firstname %><br>
-                        <strong>lastname</strong>: <%= user.local.lastname %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <br><%= user.local.password %>
+                        <strong>id</strong>:<br> <%= user._id %><br>
+                        <strong>firstname</strong>:<br> <%= user.local.firstname %><br>
+                        <strong>lastname</strong>:<br> <%= user.local.lastname %><br>
+                        <strong>email</strong>:<br> <%= user.local.email %><br>
                     </p>
-
-            </div>
+                </div>
         </div>
-
+        <!-- FRIENDS AND FAVORITES -->        
+        <div class="col-sm-6 well" style="float: right">
+            <h2><span class="fa fa-users"></span>Friends</h2>
+                <p>Insert list here</p>
+            <h2><span class="fa fa-headphones"></span>Favorite artists</h2>
+                <p>Insert list here</p>
+        </div>
     </div>
 
 </div>

@@ -91,7 +91,7 @@ app.get('/search',function(req,res){
 });
 
 //Add artist to user's liked artists
-app.get('/fave',function(req,res){
+app.get('/fave', function(req,res){
     //Create fave
 	connection.query('INSERT INTO favorite (ID,User,Bands) SELECT * FROM ( SELECT null,"'+req.user.local.email+'","'+req.query.fave+'") AS tmp WHERE NOT EXISTS (SELECT User FROM favorite WHERE User = "'+req.user.local.email+'") LIMIT 1',
 	function(err){
@@ -110,8 +110,13 @@ app.get('/fave',function(req,res){
 });
 
 //Remove the artist from user's liked artists if exists
-app.get('/unfave',function(req,res){
-	
+app.get('/unfave', function(req,res){
+	//Remove favorite band
+	connection.query('UPDATE favorite SET Bands = REPLACE(Bands, ",'+req.query.unfave+'", "") WHERE User = "'+req.user.local.email+'"',
+	function(err) {
+		if(err) throw err;
+	});
+
 	res.render('artist.ejs', { 
 		user : req.user, 
 		typeahead : req.query.unfave
