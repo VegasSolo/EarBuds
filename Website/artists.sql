@@ -12,7 +12,7 @@ CREATE TABLE `artist` (
 -- Dump data 
 -- order by `ID`
 
-INSERT INTO `artist` (ID,Name) VALUES (null,'"Weird Al" Yankovic');
+INSERT INTO `artist` (ID,Name) VALUES (null,'Weird Al Yankovic');
 INSERT INTO `artist` (ID,Name) VALUES (null,'12th Planet');
 INSERT INTO `artist` (ID,Name) VALUES (null,'2 Chainz');
 INSERT INTO `artist` (ID,Name) VALUES (null,'2AM Club');
@@ -938,5 +938,16 @@ CREATE TABLE `favorite` (
 	`ID` INT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	`User` TEXT,
 	`Bands` TEXT
+);
+
+DROP SCHEMA IF EXISTS follows;
+CREATE SCHEMA follows;
+
+DROP TABLE IF EXISTS `follow`;
+
+CREATE TABLE `follow` (
+	`ID` INT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`User` TEXT,
+	`following` TEXT
 );
 

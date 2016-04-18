@@ -59,7 +59,6 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 **  MYSQL DATABASE CONFIG  
 **  -------------------------------------------------------
 */ 
-
 //Connects to artist DB
 var connection = mysql.createConnection({
     host : process.env.IP,
@@ -67,60 +66,16 @@ var connection = mysql.createConnection({
     password : '',
     database : 'artists'
 });
+//also export this config
+module.exports.connection = connection;
 
-//Connect and update database with artists.sql file
+//Connect
 connection.connect(function(err){
     if (err) {
         console.log("SQL CONNECT ERROR: " + err);
     } else {
         console.log("SQL CONNECT SUCCESSFUL.");
     }
-});
-
-//Search DB for artist
-app.get('/search',function(req,res){
-	connection.query('select Name from artist where Name like "%'+req.query.key+'%"',
-	function(err, rows, fields) {
-		if (err) throw err;
-		var data=[];
-		for(var i=0;i<rows.length;i++) {
-			data.push(rows[i].Name);
-		}
-		res.end(JSON.stringify(data));
-	});
-});
-
-//Add artist to user's liked artists
-app.get('/fave', function(req,res){
-    //Create fave
-	connection.query('INSERT INTO favorite (ID,User,Bands) SELECT * FROM ( SELECT null,"'+req.user.local.email+'","'+req.query.fave+'") AS tmp WHERE NOT EXISTS (SELECT User FROM favorite WHERE User = "'+req.user.local.email+'") LIMIT 1',
-	function(err){
-	    if (err) throw err;
-	});
-	//Update faves and check if artist is already favorited
-	connection.query('UPDATE favorite SET Bands = CONCAT(Bands, ",'+req.query.fave+'") WHERE User = "'+req.user.local.email+'" AND Bands NOT LIKE "%'+req.query.fave+'%"',
-	function(err) {
-		if(err) throw err;
-	});
-	
-	res.render('artist.ejs', { 
-		user : req.user, 
-		typeahead : req.query.fave
-	});
-});
-
-//Remove the artist from user's liked artists if exists
-app.get('/unfave', function(req,res){
-	//Remove favorite band
-	connection.query('UPDATE favorite SET Bands = REPLACE(Bands, ",'+req.query.unfave+'", "") WHERE User = "'+req.user.local.email+'"',
-	function(err) {
-		if(err) throw err;
-	});
-
-	res.render('artist.ejs', { 
-		user : req.user, 
-		typeahead : req.query.unfave
-	});
 });
 
 

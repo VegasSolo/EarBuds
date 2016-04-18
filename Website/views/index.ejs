@@ -87,20 +87,19 @@
         }
     </style>
     
-    <!--JAVASCRIPT-->  
+        <!-- TYPEAHEAD -->
         <script type="text/javascript" src="JS/jquery.min.js"></script>
         <script type="text/javascript" src="JS/typeahead.min.js"></script>
-        
+            
         <script type="text/javascript">
-        $(document).ready(function(){
-            $('input.typeahead').typeahead({
-                name: 'typeahead',
-                remote: 'https://'+window.location.host+'/search?key=%QUERY',
-                limit: 10
+            $(document).ready(function(){
+                $('input.typeahead').typeahead({
+                    name: 'typeahead',
+                    remote: 'https://'+window.location.host+'/search?key=%QUERY',
+                    limit: 10
+                });
             });
-        });
         </script>
-     <!--END OF JAVASCRIPT-->    
   </head>
 
 <body>
