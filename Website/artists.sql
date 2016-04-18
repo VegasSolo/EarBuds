@@ -935,4 +935,3 @@ CREATE TABLE `follow` (
 	`User` TEXT,
 	`following` TEXT
 );
-
