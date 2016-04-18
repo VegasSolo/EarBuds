@@ -150,6 +150,7 @@ module.exports = function(app, passport) {
 						res.render('profile.ejs', { 
 							user : req.user,
 							favorites : array,
+							follows : array2,
 							message : 'User is not in database'
 						});
 			        }
@@ -157,6 +158,7 @@ module.exports = function(app, passport) {
 			 			res.render('profile.ejs', { 
 							user : req.user,
 							favorites : array,
+							follows : array2,
 							message : 'User is of type "undefined"'
 						});       	
 			        }
