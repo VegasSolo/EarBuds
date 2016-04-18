@@ -14,7 +14,6 @@
             font-weight: bolder;
             font-size: 800%;
             text-shadow: -1px 0px 1px #006666, 0px 1px 1px #006666, 1px 0px 1px #006666, 0px -1px 1px #006666;
-        
         }
         video{
             position:absolute;
@@ -34,8 +33,7 @@
         }
      
     </style>
-    
-    <style type="text/css">
+    <style>
         .bs-example{
         	font-family: sans-serif;
         	position: relative;
@@ -89,20 +87,19 @@
         }
     </style>
     
-    <!--JAVASCRIPT-->  
+        <!-- TYPEAHEAD -->
         <script type="text/javascript" src="JS/jquery.min.js"></script>
         <script type="text/javascript" src="JS/typeahead.min.js"></script>
-        
+            
         <script type="text/javascript">
-        $(document).ready(function(){
-            $('input.typeahead').typeahead({
-                name: 'typeahead',
-                remote: 'https://'+window.location.host+'/search?key=%QUERY',
-                limit: 10
+            $(document).ready(function(){
+                $('input.typeahead').typeahead({
+                    name: 'typeahead',
+                    remote: 'https://'+window.location.host+'/search?key=%QUERY',
+                    limit: 10
+                });
             });
-        });
         </script>
-     <!--END OF JAVASCRIPT-->    
   </head>
 
 <body>
@@ -117,10 +114,7 @@
          <div class="text"> 
             <div style="text-align:center">  
                 <div class="container">
-                     
-                    
 
-                    
                         <h1>E a r B u d s</h1>
                       
                         <div>

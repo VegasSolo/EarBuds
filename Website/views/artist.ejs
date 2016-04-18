@@ -16,6 +16,35 @@
               font-weight: bolder;
               font-size: 200%;
             }
+        h2 {
+              color:#006666;
+              font-family: sans-serif;
+              font-weight: bolder;
+              text-align: center;
+        }
+        h3 {
+              color:#006666;
+              font-family: 'Megrim', sans-serif;
+              font-weight: bolder;
+              font-size: 250%;     
+              text-align: center;
+        }
+        .text {
+              color:#006666;
+              font-family: sans-serif;
+              font-weight: bolder;
+              font-size: 150%;
+            }
+        .img {
+              border-radius: 6px; 
+              border: 1px solid black ;   
+              max-width:100%; 
+              max-height:100%;
+            }
+        .userbutton {
+              margin-bottom: 10px;
+              text-align: center;
+        }
             
         /*CSS for album artwork! Do not modify!*/    
         body {
@@ -23,7 +52,7 @@
             }
          #search-form,
         .form-control {
-              margin-bottom: 20px;
+              margin-bottom: 10px;
             }
         .cover {
               width: 300px;
@@ -37,22 +66,136 @@
         .cover.playing {
               border: 5px solid #e45343;
             }
+            
+        /*CSS for typeahead*/    
+        .typeahead, .tt-query, .tt-hint {
+        	border: 2px solid #CCCCCC;
+        	border-radius: 6px; 
+        	font-size: 16px;
+        	height: 32px;    
+        	line-height: 30px;
+        	outline: medium none;
+        	padding: 4px 12px;
+        	width: 600px;
+        }
+        .typeahead {
+        	background-color: #FFFFFF;
+        }
+        .typeahead:focus {
+        	border: 2px solid #0097CF;
+        }
+        .tt-query {
+        	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        }
+        .tt-hint {
+        	color: #999999;
+        }
+        .tt-dropdown-menu {
+        	background-color: #FFFFFF;
+        	border: 1px solid rgba(0, 0, 0, 0.2);
+        	border-radius: 8px;
+        	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        	margin-top: 12px;
+        	padding: 8px 0;
+        	width: 600px;
+        }
+        .tt-suggestion {
+        	font-size: 24px;
+        	line-height: 24px;
+        	padding: 3px 20px;
+        }
+        .tt-suggestion.tt-is-under-cursor {
+        	background-color: #0097CF;
+        	color: #FFFFFF;
+        }
+        .tt-suggestion p {
+        	margin: 0;
+        }
   </style>
-  
-  <div class="container">
-      <h1>Search for another Artist</h1>
-      <form id="search-form">
-      <input type="text" id="query" value="" class="form-control" placeholder="Type an Artist Name" />
-      <input type="submit" id="search" class="btn btn-warning btn-lgt" value="Search" />
-      </form>
-        <div class="home">
-          <p>Or go <a href="/">home</a>.</p>
+          <!-- TYPEAHEAD -->
+        <script type="text/javascript" src="JS/jquery.min.js"></script>
+        <script type="text/javascript" src="JS/typeahead.min.js"></script>
+            
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('input.typeahead').typeahead({
+                    name: 'typeahead',
+                    remote: 'https://'+window.location.host+'/search?key=%QUERY',
+                    limit: 10
+                });
+            });
+        </script>
+        
+      <div class="col-sm-9 well" style="margin-left: 2%">
+        <h1>Search for another Artist</h1>
+          <div>
+            <form action="/artist" method="get">
+              <input type="text" id="query" name="typeahead" style="vertical-align: bottom" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Search Artists">
+              <button type="submit" id="search" style="vertical-align: bottom" class="btn btn-warning btn-lgt">Search</button>
+            </form>
+          </div>
+          <div class="home">
+            <p>Or go <a href="/">home</a>.</p>
+          </div>
+        <div id="results"></div>
+      </div>
+      
+            <!-- User Box only appears when logged In -->
+      <% if (typeof user !== 'undefined') { %>
+        <div class="col-sm-2 well" style="margin-left: 4%; margin-right: 2%">
+          <h2><span class="fa fa-user"></span><%=user.local.username%></h2>
+            <div class="col-sm-12">
+              <img src="<%=user.local.imgurl%>" alt="avatar" class="img">
+            </div>
+            <div class="col-sm-12" style="text-align: center">
+              <div class="userbutton">
+                <a href="/logout" class="btn btn-warning btn-lgt btn-block">Logout</a>
+                <a href="/profile" class="btn btn-warning btn-lgt btn-block">Profile</a>
+              </div>
+            </div>
         </div>
-      <div id="results"></div>
-  </div>
-  
-</head>
+      <% } else { %>
+      <div class="col-sm-2 well" style="margin-left: 4%; margin-right: 2%">
+        <h3>E A R B U D S</h3>
+        
+        <div class="col-sm-12" style="text-align: center">        
+          <div class="userbutton">
+            <a href="/login" class="btn btn-warning btn-lgt btn-block"><span class="fa fa-user"></span> Login </a>
+            <a href="/signup" class="btn btn-warning btn-lgt btn-block"><span class="fa fa-pencil-square-o"></span> Signup </a>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      
+      <% if (typeof user !== 'undefined' && typeahead != "") { %>
+      <div class="col-sm-2 well" style="margin-left: 4%; margin-right: 2%">      
+        <h2 style="text-align: center"><span class="fa fa-headphones"></span><%=typeahead%></h2>
+          <div class="col-sm-12">
+            <div class="userbutton">
+              <form action="/fave" method="GET">
+                  <input type="hidden" name="fave" value="<%=typeahead%>">
+                  <button type="submit" class="btn btn-warning btn-lgt btn-block">Favorite</button>
+              </form>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="userbutton">
+              <form action="/unfave" method="GET">
+                  <input type="hidden" name="unfave" value="<%=typeahead%>">
+                  <button type="submit" class="btn btn-warning btn-lgt btn-block">UnFavorite</button>
+              </form>
+            </div>
+          </div>        
+      </div>
+      <% } else { %>
+      <div class="col-sm-2 well" style="margin-left: 4%; margin-right: 2%">    
+        <h2 style="text-align: center"><span class="fa fa-headphones"></span><%=typeahead%></h2>   
+      </div>
+      <% } %>
+        
+  </head>
   <body>
+    
   <!--Javascript code-->
   <script id="results-template" type="text/x-handlebars-template">
   {{#each albums.items}}
