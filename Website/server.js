@@ -59,7 +59,6 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 **  MYSQL DATABASE CONFIG  
 **  -------------------------------------------------------
 */ 
-
 //Connects to artist DB
 var connection = mysql.createConnection({
     host : process.env.IP,
@@ -67,8 +66,10 @@ var connection = mysql.createConnection({
     password : '',
     database : 'artists'
 });
+//also export this config
+module.exports.connection = connection;
 
-//Connect and update database with artists.sql file
+//Connect
 connection.connect(function(err){
     if (err) {
         console.log("SQL CONNECT ERROR: " + err);
@@ -77,18 +78,6 @@ connection.connect(function(err){
     }
 });
 
-//Search DB for artist
-app.get('/search',function(req,res){
-	connection.query('select Name from artist where Name like "%'+req.query.key+'%"',
-	function(err, rows, fields) {
-		if (err) throw err;
-		var data=[];
-		for(var i=0;i<rows.length;i++) {
-			data.push(rows[i].Name);
-		}
-		res.end(JSON.stringify(data));
-	});
-});
 
 /* 
 **  -------------------------------------------------------
