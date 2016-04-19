@@ -1,8 +1,7 @@
 0 info it worked if it ends with ok
 1 verbose cli [ '/home/ubuntu/.nvm/versions/node/v4.2.4/bin/node',
 1 verbose cli   '/home/ubuntu/.nvm/versions/node/v4.2.4/bin/npm',
-1 verbose cli   'install',
-1 verbose cli   '--dev' ]
+1 verbose cli   'install' ]
 2 info using npm@2.14.12
 3 info using node@v4.2.4
 4 verbose readDependencies loading dependencies from /home/ubuntu/workspace/package.json
@@ -11,7 +10,7 @@
 6 verbose stack     at Error (native)
 7 verbose cwd /home/ubuntu/workspace
 8 error Linux 4.2.0-c9
-9 error argv "/home/ubuntu/.nvm/versions/node/v4.2.4/bin/node" "/home/ubuntu/.nvm/versions/node/v4.2.4/bin/npm" "install" "--dev"
+9 error argv "/home/ubuntu/.nvm/versions/node/v4.2.4/bin/node" "/home/ubuntu/.nvm/versions/node/v4.2.4/bin/npm" "install"
 10 error node v4.2.4
 11 error npm  v2.14.12
 12 error path /home/ubuntu/workspace/package.json
