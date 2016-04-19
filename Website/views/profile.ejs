@@ -178,6 +178,15 @@
         	margin: 0;
         }
        
+       .mybox{
+          
+            width:300px;
+            height:300px;
+            
+            background-color:rgba(255,255,255,0.7);
+            
+        
+       }
     </style>
 </head>
 
@@ -185,19 +194,19 @@
     
     <div class="container">
         <h1 style="text-align: center"><br> <%= user.local.firstname %> <%= user.local.lastname %><br> </h1>
-        <div class="page-header text-center">
         
+        <!--Account Editing-->
         <div id="openModal" class="modalDialog">
         	<div class="well">
         		<a href="#close" title="Close" class="close">X</a>
-        		<h2>Edit User</h2>
+        		<h2>Edit Account</h2>
                 <form action="/editUser" method="post">
                     <div class="form-group">
-                        <label>Profile Image</label>
+                        <label>Profile Picture</label>
                         <input type="text" class="form-control" name="imgurl" value=<%=user.local.imgurl%>>
                     </div>
                     <div class="form-group">
-                        <label>User Name</label>
+                        <label>Username</label>
                         <input type="text" class="form-control" name="username" value=<%=user.local.username%>>
                     </div>
                     <div class="form-group">
@@ -225,13 +234,13 @@
                 
         	</div>
         </div>
-    </div>
+   <!--End of Account Editing-->
     
           <!-- show any messages that come back with authentication -->
             <% if (typeof message !== 'undefined' && message.length > 0) { %>
                 <div class="alert alert-danger"><%= message %></div>
             <% } %>
-    </div>
+    
     
     
     
@@ -251,27 +260,26 @@
             });
         </script>
 
-    
+        <!--CURRENTLY WORKIG HERE-->
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-5 well" >
+        <div class="mybox" >
             <h2><span class="fa fa-user"></span><%=user.local.username%></h2>
-                <div class="col-sm-7" style="margin-left: 20%">
+                <div class="col-sm-4" style="margin-left: 5%">
                     <img src="<%=user.local.imgurl%>" alt="avatar" class="img"> 
                 </div>
-                
-            
         </div>
+        
         <!-- FRIENDS AND FAVORITES -->        
         <div class="col-sm-6 well" style="float: right">
             
             <h2><span class="fa fa-users"></span>Following</h2>
+             
                 <form action="/user" method="get">
                     <div>
                         <input type="text" style="vertical-align: top" class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
                         <button type="submit" style="vertical-align: bottom; margin-top: 10px" class="btn btn-warning btn-lgt center-block">Search</button>
                     </div>
                 </form>
-
                 
                 <div class="col-sm-12">
                     <% if (typeof follows !== 'undefined' && follows[0] !== '' ) { %>
@@ -291,8 +299,16 @@
                     <% } %>
                 </div>
         </div>
-    </div>
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
 
 </body>
 </html>
