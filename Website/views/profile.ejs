@@ -287,44 +287,35 @@
         <!-- FRIENDS AND FAVORITES -->        
         <div class="mybox2" >
             
-            <h2><span class="fa fa-users"></span>Following</h2>
              <div class="col-sm-12">
+                <h2><span class="fa fa-users"></span>Following</h2>
                     <% if (typeof follows !== 'undefined' && follows[0] !== '' ) { %>
-                        <p style="text-align: center; margin-top: 10px"><%=follows%></p>
+                        <p style="text-align: center"><%=follows%></p>
                     <% } else {%>
-                        <p style="text-align: center; margin-top: 10px">No followers have been added by this user yet!</p>
+                        <p style="text-align: center">No followers have been added by this user yet!</p>
                     <% } %>
                 </div>
                 
-                 <div>
-                <form action="/user" method="get">
-                        <input type="text" style="vertical-align: top," class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
-                        <button type="submit" style="vertical-align: bottom; margin-top: 10px" class="btn btn-warning btn-lgt center-block">Search</button>
-                </form>
+                <div class="col-sm-12">
+                    <form action="/user" method="get">
+                            <input type="text"  class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
+                            <button type="submit" style="vertical-align: bottom; margin-top: 10px" class="btn btn-warning btn-lgt center-block">Search</button>
+                    </form>
                 </div>
               
                 
-                <h2><span class="fa fa-headphones"></span>Favorite artists</h2>
-                
                 <div class="col-sm-12">
+                    <h2><span class="fa fa-headphones"></span>Favorite artists</h2>
+                    
                     <% if (typeof favorites !== 'undefined' && favorites[0] !== '' ) { %>
-                        <p style="text-align: center; margin-top: 10px"><%=favorites%></p>
+                        <p style="text-align: center"><%=favorites%></p>
                     <% } else {%>
-                        <p style="text-align: center; margin-top: 10px">No artists have been favorited by this user yet!</p>
+                        <p style="text-align: center">No artists have been favorited by this user yet!</p>
                     <% } %>
                 </div>
                 
                 
         </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
 </div>
 
 </body>
