@@ -2,25 +2,71 @@
 <!doctype html>
 <html>
 <head>
-    <title>Ear Buds</title>
+    
+    <!--CODE FOR NAVBAR-->
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><p3>EB</p3></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     
+      <form action="/artist" method="get" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+        <input type="text" class="form-control" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+        <ul class="nav navbar-nav navbar-right">
+        <li><a href="#openModal">Edit Account</a></li>
+      <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+    </nav>
+    <!--END OF NAVBAR CODE-->
+
+    <title>EarBuds</title>
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 
     <style>
-        body        { padding-top:80px; word-wrap:break-word; }
+    
+        body {  
+            background-image: url(images/Earbuds.jpg);
+            background-size: 100% auto;
+            word-wrap:break-word;
+            
+        }
 
         h1 {
-            color:#006666;
+            color:#ffffff;
             font-family: 'Megrim', sans-serif;
             font-weight: bolder;
             font-size: 400%;
         }
+        
         h2 {
             color:#006666;
             font-family: sans-serif;
             font-weight: bolder;
             text-align: center;
+        }
+        
+        p3{
+            color:#006666;
+            font-family: 'Megrim', sans-serif;
+            font-weight: bolder;
         }
         
         .img {
@@ -82,16 +128,11 @@
     		box-shadow: 1px 1px 3px #000;
     	}
     
-    	.close:hover { background: #00d9ff; }
-	</style>
-	<style>
-        .bs-example{
-        	font-family: sans-serif;
-        	position: relative;
-        	float: left;
-        	z-index: 3;
-        
-        }
+    	.close:hover { 
+    	    background: #00d9ff; 
+    	    
+    	}
+
         .typeahead, .tt-query, .tt-hint {
         	border: 2px solid #CCCCCC;
         	border-radius: 6px; 
@@ -102,18 +143,15 @@
         	padding: 4px 12px;
         	width: 422px;
         }
+        
         .typeahead {
         	background-color: #FFFFFF;
         }
+        
         .typeahead:focus {
         	border: 2px solid #0097CF;
         }
-        .tt-query {
-        	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-        }
-        .tt-hint {
-        	color: #999999;
-        }
+       
         .tt-dropdown-menu {
         	background-color: #FFFFFF;
         	border: 1px solid rgba(0, 0, 0, 0.2);
@@ -124,38 +162,51 @@
         	width: 422px;
         	
         }
+        
         .tt-suggestion {
         	font-size: 24px;
         	line-height: 24px;
         	padding: 3px 20px;
         }
+        
         .tt-suggestion.tt-is-under-cursor {
         	background-color: #0097CF;
         	color: #FFFFFF;
         }
+        
         .tt-suggestion p {
         	margin: 0;
         }
+       
+       .mybox{
+          
+            width:300px;
+            height:300px;
+            
+            background-color:rgba(255,255,255,0.7);
+            
+        
+       }
     </style>
 </head>
+
 <body>
-<div class="container">
-            <h1 style="text-align: center">Profile Page</h1>
-    <div class="page-header text-center">
+    
+    <div class="container">
+        <h1 style="text-align: center"><br> <%= user.local.firstname %> <%= user.local.lastname %><br> </h1>
         
-        <a href="/logout" class="btn btn-warning btn-lgt" style="margin-bottom: 10px">Logout</a>
-        <a href="#openModal" class="btn btn-warning btn-lgt" style="margin-bottom: 10px">Edit info</a>
+        <!--Account Editing-->
         <div id="openModal" class="modalDialog">
         	<div class="well">
         		<a href="#close" title="Close" class="close">X</a>
-        		<h2>Edit User</h2>
+        		<h2>Edit Account</h2>
                 <form action="/editUser" method="post">
                     <div class="form-group">
-                        <label>Profile Image</label>
+                        <label>Profile Picture</label>
                         <input type="text" class="form-control" name="imgurl" value=<%=user.local.imgurl%>>
                     </div>
                     <div class="form-group">
-                        <label>User Name</label>
+                        <label>Username</label>
                         <input type="text" class="form-control" name="username" value=<%=user.local.username%>>
                     </div>
                     <div class="form-group">
@@ -178,22 +229,22 @@
                         <input type="hidden" class="form-control" name="email" value=<%=user.local.email%> >
                     </div>
             
-                    <button type="submit" class="btn btn-warning btn-lg">Edit</button>
+                    <button type="submit" class="btn btn-warning btn-lg">Submit</button>
                 </form>
                 
         	</div>
         </div>
-        <div>
-            <form action="/artist" method="get">
-                <input type="text" style="vertical-align: bottom" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
-                <button type="submit" style="vertical-align: bottom" class="btn btn-warning btn-lgt">Search</button>
-            </form>
-        </div>
-            <!-- show any messages that come back with authentication -->
+   <!--End of Account Editing-->
+    
+          <!-- show any messages that come back with authentication -->
             <% if (typeof message !== 'undefined' && message.length > 0) { %>
                 <div class="alert alert-danger"><%= message %></div>
             <% } %>
-    </div>
+    
+    
+    
+    
+    
     
         <!-- TYPEAHEAD -->
         <script type="text/javascript" src="JS/jquery.min.js"></script>
@@ -209,34 +260,26 @@
             });
         </script>
 
-    <div class="container">
+        <!--CURRENTLY WORKIG HERE-->
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-5 well" style="float: left">
+        <div class="mybox" >
             <h2><span class="fa fa-user"></span><%=user.local.username%></h2>
                 <div class="col-sm-4" style="margin-left: 5%">
                     <img src="<%=user.local.imgurl%>" alt="avatar" class="img"> 
                 </div>
-                
-                <div class="col-sm-6">
-                    <p>
-                        <strong>id</strong>:<br> <%= user._id %><br>
-                        <strong>firstname</strong>:<br> <%= user.local.firstname %><br>
-                        <strong>lastname</strong>:<br> <%= user.local.lastname %><br>
-                        <strong>email</strong>:<br> <%= user.local.email %><br>
-                    </p>
-                </div>
         </div>
+        
         <!-- FRIENDS AND FAVORITES -->        
         <div class="col-sm-6 well" style="float: right">
             
             <h2><span class="fa fa-users"></span>Following</h2>
+             
                 <form action="/user" method="get">
-                    <div class="col-sm-12">
+                    <div>
                         <input type="text" style="vertical-align: top" class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
                         <button type="submit" style="vertical-align: bottom; margin-top: 10px" class="btn btn-warning btn-lgt center-block">Search</button>
                     </div>
                 </form>
-
                 
                 <div class="col-sm-12">
                     <% if (typeof follows !== 'undefined' && follows[0] !== '' ) { %>
@@ -256,8 +299,16 @@
                     <% } %>
                 </div>
         </div>
-    </div>
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </div>
+
 </body>
 </html>
