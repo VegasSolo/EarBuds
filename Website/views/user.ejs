@@ -121,12 +121,37 @@
         .tt-suggestion p {
         	margin: 0;
         }
+        
+        
+        .mybox{
+          
+            width:500px;
+            height:300px;
+             border-radius: 25px 25px 25px 25px;
+            background-color:rgba(255,255,255,0.7);
+            float:left;
+        
+       }
+       .mybox2{
+           width:500px;
+            height:300px;
+             border-radius: 25px 25px 25px 25px;
+            background-color:rgba(255,255,255,0.7);
+            float:right;
+       }
+       .propic{
+           width: 200px;
+           height:200px;
+           margin-left: auto;
+        margin-right: auto
+       }
+        
     </style>
 </head>
 <body>
 <div class="container">
            <h1 style="text-align: center"><br> <%= user2.local.firstname %> <%= user2.local.lastname %><br> </h1>
-        <div class="page-header text-center">
+        <hr>
         
        
                 
@@ -153,16 +178,16 @@
 
     <div class="container">
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-5 well" style="float: left">
+        <div class="mybox" >
             <h2><span class="fa fa-user"></span><%=user2.local.username%></h2>
-                <div class="col-sm-4" style="margin-left: 5%">
+                <div class="propic">
                     <img src="<%=user2.local.imgurl%>" alt="avatar" class="img"> 
                 </div>
                 
                 
         </div>
         <!-- FRIENDS AND FAVORITES -->        
-        <div class="col-sm-6 well" style="float: right">
+        <div class="mybox2" >
             <h2><span class="fa fa-users"></span>Following</h2>
             <div class="col-sm-12">
                  <div class="col-sm-6">   
