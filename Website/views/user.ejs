@@ -26,7 +26,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
         <ul class="nav navbar-nav navbar-right">
-        <li><a href="#openModal">Edit Account</a></li>
+        <li><a href="/profile">Home</a></li>
       <li><a href="/logout">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -34,7 +34,7 @@
     </nav>
     <!--END OF NAVBAR CODE-->
 
-    <title>Ear Buds</title>
+    <title>EarBuds</title>
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
@@ -47,7 +47,7 @@
              }
 
         h1 {
-            color:#006666;
+           color:#ffffff;
             font-family: 'Megrim', sans-serif;
             font-weight: bolder;
             font-size: 400%;
@@ -121,12 +121,37 @@
         .tt-suggestion p {
         	margin: 0;
         }
+        
+        
+        .mybox{
+          
+            width:500px;
+            height:300px;
+             border-radius: 25px 25px 25px 25px;
+            background-color:rgba(255,255,255,0.7);
+            float:left;
+        
+       }
+       .mybox2{
+           width:500px;
+            height:300px;
+             border-radius: 25px 25px 25px 25px;
+            background-color:rgba(255,255,255,0.7);
+            float:right;
+       }
+       .propic{
+           width: 200px;
+           height:200px;
+           margin-left: auto;
+        margin-right: auto
+       }
+        
     </style>
 </head>
 <body>
 <div class="container">
-           <h1 style="text-align: center"><br> <%= user.local.firstname %> <%= user.local.lastname %><br> </h1>
-        <div class="page-header text-center">
+           <h1 style="text-align: center"><br> <%= user2.local.firstname %> <%= user2.local.lastname %><br> </h1>
+        <hr>
         
        
                 
@@ -153,23 +178,16 @@
 
     <div class="container">
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-5 well" style="float: left">
+        <div class="mybox" >
             <h2><span class="fa fa-user"></span><%=user2.local.username%></h2>
-                <div class="col-sm-4" style="margin-left: 5%">
+                <div class="propic">
                     <img src="<%=user2.local.imgurl%>" alt="avatar" class="img"> 
                 </div>
                 
-                <div class="col-sm-6">
-                    <p>
-                        <strong>id</strong>:<br> <%= user2._id %><br>
-                        <strong>firstname</strong>:<br> <%= user2.local.firstname %><br>
-                        <strong>lastname</strong>:<br> <%= user2.local.lastname %><br>
-                        <strong>email</strong>:<br> <%= user2.local.email %><br>
-                    </p>
-                </div>
+                
         </div>
         <!-- FRIENDS AND FAVORITES -->        
-        <div class="col-sm-6 well" style="float: right">
+        <div class="mybox2" >
             <h2><span class="fa fa-users"></span>Following</h2>
             <div class="col-sm-12">
                  <div class="col-sm-6">   
