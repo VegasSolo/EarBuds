@@ -23,8 +23,16 @@
         <div class="form-group">
         <input type="text" class="form-control" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
       </form>
+      
+       <form action="/user" method="get" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+         <input type="text" style="vertical-align: top," class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
+        </div>
+        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
+      </form>
+      
         <ul class="nav navbar-nav navbar-right">
         <li><a href="/profile"><p4>Home</p4></a></li>
       <li><a href="/logout"><p4>Logout</p4></a></li>
@@ -71,6 +79,7 @@
           
             font-weight: bolder;
         }
+       
         .img {
             border-radius: 6px; 
             border: 1px solid black ;   
@@ -171,7 +180,7 @@
                         <button type="submit" class="btn btn-warning btn-lgt">UnFollow</button>
                     </form>
                 </div>
-        <hr>
+        
         
        
                 
@@ -197,6 +206,7 @@
         </script>
 
     <div class="container">
+        <hr>
         <!-- LOCAL INFORMATION -->
         <div class="mybox" >
             <h2><span class="fa fa-user"></span><%=user2.local.username%></h2>

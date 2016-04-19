@@ -24,8 +24,22 @@
         <div class="form-group">
         <input type="text" class="form-control" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
       </form>
+      
+      <form action="/user" method="get" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+         <input type="text" style="vertical-align: top," class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
+        </div>
+        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
+      </form>
+      
+      
+      
+      
+      
+      
+      
         <ul class="nav navbar-nav navbar-right" >
         <li ><a href="#openModal"><p4>Edit Account</p4></a></li>
       <li><a href="/logout"><p4>Logout</p4></a></li>
@@ -212,7 +226,7 @@
     
     <div class="container">
         <h1 style="text-align: center"><br> <%= user.local.firstname %> <%= user.local.lastname %><br> </h1>
-       <hr>
+       
         <!--Account Editing-->
         <div id="openModal" class="modalDialog">
         	<div class="well">
@@ -277,7 +291,7 @@
                 });
             });
         </script>
-
+<hr>
         <!--CURRENTLY WORKIG HERE-->
         <!-- LOCAL INFORMATION -->
         <div class="mybox" >
@@ -300,12 +314,7 @@
                     <% } %>
                 </div>
                 
-                 <div>
-                <form action="/user" method="get">
-                        <input type="text" style="vertical-align: top," class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
-                        <button type="submit" style="vertical-align: bottom; margin-top: 10px" class="btn btn-warning btn-lgt center-block">Search</button>
-                </form>
-                </div>
+              
               
                 
                 <h2><span class="fa fa-headphones"></span>Favorite artists</h2>
