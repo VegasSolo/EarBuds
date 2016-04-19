@@ -29,6 +29,7 @@
         <ul class="nav navbar-nav navbar-right">
         <li><a href="#openModal">Edit Account</a></li>
       <li><a href="/logout">Logout</a></li>
+      <li><a href="#">Login To Spotify</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -180,12 +181,25 @@
        
        .mybox{
           
-            width:300px;
+            width:500px;
             height:300px;
-            
+             border-radius: 25px 25px 25px 25px;
             background-color:rgba(255,255,255,0.7);
-            
+            float:left;
         
+       }
+       .mybox2{
+           width:500px;
+            height:300px;
+             border-radius: 25px 25px 25px 25px;
+            background-color:rgba(255,255,255,0.7);
+            float:right;
+       }
+       .propic{
+           width: 200px;
+           height:200px;
+           margin-left: auto;
+        margin-right: auto
        }
     </style>
 </head>
@@ -263,24 +277,23 @@
         <!--CURRENTLY WORKIG HERE-->
         <!-- LOCAL INFORMATION -->
         <div class="mybox" >
-            <h2><span class="fa fa-user"></span><%=user.local.username%></h2>
-                <div class="col-sm-4" style="margin-left: 5%">
+              <h2><span class="fa fa-user"></span><%=user.local.username%></h2>
+                <div class ="propic" >
                     <img src="<%=user.local.imgurl%>" alt="avatar" class="img"> 
                 </div>
+               
         </div>
         
         <!-- FRIENDS AND FAVORITES -->        
-        <div class="col-sm-6 well" style="float: right">
+        <div class="mybox2" >
             
             <h2><span class="fa fa-users"></span>Following</h2>
-             
+                 <div>
                 <form action="/user" method="get">
-                    <div>
-                        <input type="text" style="vertical-align: top" class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
-                        <button type="submit" style="vertical-align: bottom; margin-top: 10px" class="btn btn-warning btn-lgt center-block">Search</button>
-                    </div>
+                        <input type="text" style="vertical-align: top" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
+                        <button type="submit" style="vertical-align: top" class="btn btn-warning btn-lgt">Search</button>
                 </form>
-                
+                </div>
                 <div class="col-sm-12">
                     <% if (typeof follows !== 'undefined' && follows[0] !== '' ) { %>
                         <p style="text-align: center; margin-top: 10px"><%=follows%></p>
