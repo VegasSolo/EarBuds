@@ -2,13 +2,49 @@
 <!doctype html>
 <html>
 <head>
+    <!--CODE FOR NAVBAR-->
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><p3>EB</p3></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     
+      <form action="/artist" method="get" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+        <input type="text" class="form-control" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+        <ul class="nav navbar-nav navbar-right">
+        <li><a href="#openModal">Edit Account</a></li>
+      <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+    </nav>
+    <!--END OF NAVBAR CODE-->
+
     <title>Ear Buds</title>
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 
     <style>
-        body        { padding-top:80px; word-wrap:break-word; }
+        body        { 
+            background-image: url(images/Earbuds.jpg);
+            background-size: 100% auto;
+            word-wrap:break-word;
+             }
 
         h1 {
             color:#006666;
@@ -22,15 +58,18 @@
             font-weight: bolder;
             text-align: center;
         }
-        
+        p3{
+            color:#006666;
+            font-family: 'Megrim', sans-serif;
+            font-weight: bolder;
+        }
         .img {
             border-radius: 6px; 
             border: 1px solid black ;   
             max-width:100%; 
             max-height:100%;
         }
-	</style>
-	<style>
+
         .bs-example{
         	font-family: sans-serif;
         	position: relative;
@@ -86,18 +125,12 @@
 </head>
 <body>
 <div class="container">
-            <h1 style="text-align: center">Profile Page</h1>
-    <div class="page-header text-center">
+           <h1 style="text-align: center"><br> <%= user.local.firstname %> <%= user.local.lastname %><br> </h1>
+        <div class="page-header text-center">
         
-        <a href="/logout" class="btn btn-warning btn-lgt" style="margin-bottom: 10px">Logout</a>
-        <a href="/profile" class="btn btn-warning btn-lgt" style="margin-bottom: 10px">My Profile</a>
+       
                 
-        <div>
-            <form action="/artist" method="get">
-                <input type="text" style="vertical-align: bottom" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
-                <button type="submit" style="vertical-align: bottom" class="btn btn-warning btn-lgt">Search</button>
-            </form>
-        </div>
+     
             <!-- show any messages that come back with authentication -->
             <% if (typeof message !== 'undefined' && message.length > 0) { %>
                 <div class="alert alert-danger"><%= message %></div>
