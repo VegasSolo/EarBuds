@@ -59,12 +59,10 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 **  MYSQL DATABASE CONFIG  
 **  -------------------------------------------------------
 */ 
-
 //Connects to artist DB
 var connection = mysql.createConnection({
-
+    host : process.env.IP,
     user : 'osvvald',   //INSERT YOUR CLOUD 9 USERNAME HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     password : '',
     database : 'artists'
 });
@@ -72,18 +70,6 @@ var connection = mysql.createConnection({
 module.exports.connection = connection;
 
 //Connect
-
-
-//Connects to artist DB
-var connection = mysql.createConnection({
-    host : process.env.IP,
-    user : 'jenlisbeth',   //INSERT YOUR CLOUD 9 USERNAME HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    password : '',
-    database : 'artists'
-});
-
-//Connect and update database with artists.sql file
->>>>>>> 2182d4062dff8d4a7e1c1d81da2d4332271ee070
 connection.connect(function(err){
     if (err) {
         console.log("SQL CONNECT ERROR: " + err);
@@ -92,21 +78,6 @@ connection.connect(function(err){
     }
 });
 
-<<<<<<< HEAD
-=======
-//Search DB for artist
-app.get('/search',function(req,res){
-	connection.query('select Name from artist where Name like "%'+req.query.key+'%"',
-	function(err, rows, fields) {
-		if (err) throw err;
-		var data=[];
-		for(var i=0;i<rows.length;i++) {
-			data.push(rows[i].Name);
-		}
-		res.end(JSON.stringify(data));
-	});
-});
->>>>>>> 2182d4062dff8d4a7e1c1d81da2d4332271ee070
 
 /* 
 **  -------------------------------------------------------
@@ -115,8 +86,4 @@ app.get('/search',function(req,res){
 */ 
 app.listen(port,ip);
 console.log("IP: "+process.env.IP);
-<<<<<<< HEAD
 console.log("PORT: "+process.env.PORT);
-=======
-console.log("PORT: "+process.env.PORT);
->>>>>>> 2182d4062dff8d4a7e1c1d81da2d4332271ee070
