@@ -18,4 +18,4 @@
 FINAL ITERATION
 - menu bar (control bar on bottom, could be dummy for artist/song playing)
 - links to artists and users at favorite location (instead of strings)
-- full playback and playlist (w/ spotify)
+- full playback and playlist (w/ spotify) [taylor said this would be a plus]
