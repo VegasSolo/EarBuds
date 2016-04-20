@@ -259,6 +259,63 @@ module.exports = function(app, passport) {
 		}); 
 	});
 	
+	// =====================================
+    // SPOTIFY ROUTES =====================
+    // =====================================
+    // route for spotify authentication and login
+	app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private']}));
+	
+    // handle the callback after spotify has authenticated the user
+    app.get('/auth/spotify/callback',
+        passport.authenticate('spotify', {
+            successRedirect : '/profile',
+            failureRedirect : '/profile'
+     }));
+     
+    // =============================================================================
+	// AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
+	// =============================================================================
+
+    // locally --------------------------------
+    app.get('/connect/local', function(req, res) {
+        res.render('connect-local.ejs', { message: req.flash('loginMessage') });
+    });
+    app.post('/connect/local', passport.authenticate('local-signup', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/connect/local', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+    app.get('/unlink/local', function(req, res) {
+        var user            = req.user;
+        user.local.email    = undefined;
+        user.local.password = undefined;
+        user.save(function(err) {
+        	if (err) throw err;
+            res.redirect('/profile');
+        });
+	});
+
+    // spotify -------------------------------
+
+    // send to spotify to do the authentication
+    app.get('/connect/spotify', passport.authorize('spotify', {scope: ['user-read-email', 'user-read-private']}));
+
+    // handle the callback after spotify has authorized the user
+    app.get('/connect/spotify/callback',
+        passport.authorize('spotify', {
+            successRedirect : '/profile',
+            failureRedirect : '/profile'
+    }));
+    
+     // spotify -------------------------------
+    app.get('/unlink/spotify', function(req, res) {
+        var user            = req.user;
+        user.spotify.token = undefined;
+        user.save(function(err) {
+        	if (err) throw err;
+            res.redirect('/profile');
+        });
+    });
 
 	// =====================================
 	// LOGOUT ==============================

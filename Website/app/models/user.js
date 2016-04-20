@@ -14,25 +14,12 @@ var userSchema = mongoose.Schema({
         lastname     : String
         
     },
-    facebook         : {
+    spotify         : {
         id           : String,
         token        : String,
         email        : String,
         name         : String
     },
-    twitter          : {
-        id           : String,
-        token        : String,
-        displayName  : String,
-        username     : String
-    },
-    google           : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String
-    }
-
 });
 
 // methods ======================
