@@ -24,12 +24,26 @@
         <div class="form-group">
         <input type="text" class="form-control" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
       </form>
-        <ul class="nav navbar-nav navbar-right">
-        <li><a href="#openModal">Edit Account</a></li>
-      <li><a href="/logout">Logout</a></li>
-      <li><a href="#">Login To Spotify</a></li>
+      
+      <form action="/user" method="get" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+         <input type="text" style="vertical-align: top," class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
+        </div>
+        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
+      </form>
+      
+      
+      
+      
+      
+      
+      
+        <ul class="nav navbar-nav navbar-right" >
+        <li ><a href="#openModal"><p4>Edit Account</p4></a></li>
+      <li><a href="/logout"><p4>Logout</p4></a></li>
+      <li><a href="#"><p4>Login To Spotify</p4></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -40,7 +54,7 @@
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-
+    <link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
     <style>
     
         body {  
@@ -59,8 +73,8 @@
         
         h2 {
             color:#006666;
-            font-family: sans-serif;
-            font-weight: bolder;
+            font-family: 'Grand Hotel', cursive;
+            
             text-align: center;
         }
         
@@ -69,7 +83,14 @@
             font-family: 'Megrim', sans-serif;
             font-weight: bolder;
         }
-        
+        p4{
+            color:#006666;
+      
+            font-weight: bolder;
+        }
+        hr{
+            border-color:#ff9900;
+        }
         .img {
             border-radius: 6px; 
             border: 1px solid black ;   
@@ -208,7 +229,7 @@
     
     <div class="container">
         <h1 style="text-align: center"><br> <%= user.local.firstname %> <%= user.local.lastname %><br> </h1>
-       <hr>
+       
         <!--Account Editing-->
         <div id="openModal" class="modalDialog">
         	<div class="well">
@@ -273,11 +294,11 @@
                 });
             });
         </script>
-
+<hr>
         <!--CURRENTLY WORKIG HERE-->
         <!-- LOCAL INFORMATION -->
         <div class="mybox" >
-              <h2><span class="fa fa-user"></span><%=user.local.username%></h2>
+              <h2><%=user.local.username%></h2>
                 <div class ="propic" >
                     <img src="<%=user.local.imgurl%>" alt="avatar" class="img"> 
                 </div>
@@ -288,7 +309,7 @@
         <div class="mybox2" >
             
              <div class="col-sm-12">
-                <h2><span class="fa fa-users"></span>Following</h2>
+                <h2>Following</h2>
                     <% if (typeof follows !== 'undefined' && follows[0] !== '' ) { %>
                         <p style="text-align: center"><%=follows%></p>
                     <% } else {%>
@@ -296,16 +317,11 @@
                     <% } %>
                 </div>
                 
-                <div class="col-sm-12">
-                    <form action="/user" method="get">
-                            <input type="text"  class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
-                            <button type="submit" style="vertical-align: bottom; margin-top: 10px" class="btn btn-warning btn-lgt center-block">Search</button>
-                    </form>
-                </div>
+
               
                 
                 <div class="col-sm-12">
-                    <h2><span class="fa fa-headphones"></span>Favorite artists</h2>
+                    <h2>Favorite artists</h2>
                     
                     <% if (typeof favorites !== 'undefined' && favorites[0] !== '' ) { %>
                         <p style="text-align: center"><%=favorites%></p>
