@@ -13,3 +13,9 @@
 - [Dillon] Add recommendation engine option for each artist (example code exists -- Dillon has it, ask him)
 - Menu bar for navigation
 - Bar on bottom that shows where you are in the song (like Soundcloud)
+
+
+FINAL ITERATION
+- menu bar (control bar on bottom, could be dummy for artist/song playing)
+- links to artists and users at favorite location (instead of strings)
+- full playback and playlist (w/ spotify)
