@@ -41,9 +41,10 @@
       
       
         <ul class="nav navbar-nav navbar-right" >
+         <li><a href="#"><p4>Login To Spotify</p4></a></li>   
         <li ><a href="#openModal"><p4>Edit Account</p4></a></li>
       <li><a href="/logout"><p4>Logout</p4></a></li>
-      <li><a href="#"><p4>Login To Spotify</p4></a></li>
+
       </ul>
     </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -232,7 +233,7 @@
        
         <!--Account Editing-->
         <div id="openModal" class="modalDialog">
-        	<div class="well">
+        	<div class="well" style="text-align:center">
         		<a href="#close" title="Close" class="close">X</a>
         		<h2>Edit Account</h2>
                 <form action="/editUser" method="post">
@@ -313,7 +314,7 @@
                     <% if (typeof follows !== 'undefined' && follows[0] !== '' ) { %>
                         <p style="text-align: center"><%=follows%></p>
                     <% } else {%>
-                        <p style="text-align: center">No followers have been added by this user yet!</p>
+                        <p style="text-align: center">Follows No One</p>
                     <% } %>
                 </div>
                 
@@ -326,7 +327,7 @@
                     <% if (typeof favorites !== 'undefined' && favorites[0] !== '' ) { %>
                         <p style="text-align: center"><%=favorites%></p>
                     <% } else {%>
-                        <p style="text-align: center">No artists have been favorited by this user yet!</p>
+                        <p style="text-align: center">Follows No Artists</p>
                     <% } %>
                 </div>
                 
