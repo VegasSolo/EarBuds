@@ -224,26 +224,35 @@
         </div>
         <!-- FRIENDS AND FAVORITES -->        
         <div class="mybox2" >
-            <h2>Following</h2>
-            <div class="col-sm-12">
-                 
-            </div>
                 
                 <div class="col-sm-12">
+                    <h2>Following</h2>
                     <% if (typeof follows !== 'undefined' && follows[0] !== '' ) { %>
-                        <p style="text-align: center; margin-top: 10px"><%=follows%></p>
+                    
+                        <p style="text-align: center">                   
+                            <% for(var i=0;i<follows.length;i++) { %> 
+                                <a href="/user?user2=<%=follows[i]%>"><span class="fa fa-user"></span><p4><%=follows[i]%></p4></a>
+                            <% } %>
+                        </p>
+                        
                     <% } else {%>
-                        <p style="text-align: center; margin-top: 10px">No followers have been added by this user yet!</p>
+                        <p style="text-align: center">No followers have been added by this user yet!</p>
                     <% } %>
                 </div>
                 
-                <h2>Favorite Artists</h2>
-            
                 <div class="col-sm-12">
+                    <h2>Favorite artists</h2>
+                    
                     <% if (typeof favorites !== 'undefined' && favorites[0] !== '' ) { %>
-                        <p style="text-align: center; margin-top: 10px"><%=favorites%></p>
+                    
+                        <p style="text-align: center">
+                            <% for(var i=0;i<favorites.length;i++) { %> 
+                                <a href="/artist?typeahead=<%=favorites[i]%>"><span class="fa fa-headphones"></span><p4><%=favorites[i]%></p4></a>
+                            <% } %>
+                        </p>
+                        
                     <% } else {%>
-                        <p style="text-align: center; margin-top: 10px">No artists have been favorited by this user yet!</p>
+                        <p style="text-align: center">No artists have been favorited by this user yet!</p>
                     <% } %>
                 </div>
         </div>
