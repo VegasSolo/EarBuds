@@ -172,23 +172,24 @@
 </head>
 <body>
 <div class="container">
+    
            <h1 style="text-align: center"><br> <%= user2.local.firstname %> <%= user2.local.lastname %><br> </h1>
-           <div class="col-sm-6">   
-                    <form action="/follow" style="float: right" method="get">
+           
+            <% if (Ufollows[Ufollows.indexOf(user2.local.username)] !== user2.local.username) { %>
+                <div class="col-sm-12">   
+                    <form action="/follow" method="get">
                         <input type="hidden" name="follow" value="<%=user2.local.username%>">
-                        <button type="submit" class="btn btn-warning btn-lgt">Follow</button>
+                        <button type="submit" class="btn btn-warning btn-lgt center-block">Follow</button>
                     </form>
                 </div>
-                <div class="col-sm-6">
-                    <form action="/unfollow" style="float: left" method="get">
-                        <input type="hidden" name="unfollow" value="<%=user2.local.username%>">
-                        <button type="submit" class="btn btn-warning btn-lgt">UnFollow</button>
-                    </form>
-                </div>
-        
-        
-       
-                
+            <% } else { %>
+            <div class="col-sm-12">
+                <form action="/unfollow" method="get">
+                    <input type="hidden" name="unfollow" value="<%=user2.local.username%>">
+                    <button type="submit" class="btn btn-warning btn-lgt center-block">UnFollow</button>
+                </form>
+            </div>
+            <% } %>
      
             <!-- show any messages that come back with authentication -->
             <% if (typeof message !== 'undefined' && message.length > 0) { %>
