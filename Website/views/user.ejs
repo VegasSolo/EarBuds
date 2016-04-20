@@ -23,8 +23,16 @@
         <div class="form-group">
         <input type="text" class="form-control" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
       </form>
+      
+       <form action="/user" method="get" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+         <input type="text" style="vertical-align: top," class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
+        </div>
+        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
+      </form>
+      
         <ul class="nav navbar-nav navbar-right">
         <li><a href="/profile"><p4>Home</p4></a></li>
       <li><a href="/logout"><p4>Logout</p4></a></li>
@@ -36,6 +44,7 @@
 
     <title>EarBuds</title>
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 
@@ -44,6 +53,7 @@
             background-image: url(images/Earbuds.jpg);
             background-size: 100% auto;
             word-wrap:break-word;
+            
              }
 
         h1 {
@@ -51,11 +61,12 @@
             font-family: 'Megrim', sans-serif;
             font-weight: bolder;
             font-size: 400%;
+           
         }
         h2 {
             color:#006666;
-            font-family: sans-serif;
-            font-weight: bolder;
+           font-family: 'Grand Hotel', cursive;
+            
             text-align: center;
         }
         
@@ -65,12 +76,15 @@
             font-weight: bolder;
         }
         
-         
+         hr{
+            border-color:#ff9900;
+        }
         p4{
             color:#006666;
           
             font-weight: bolder;
         }
+       
         .img {
             border-radius: 6px; 
             border: 1px solid black ;   
@@ -171,7 +185,7 @@
                         <button type="submit" class="btn btn-warning btn-lgt">UnFollow</button>
                     </form>
                 </div>
-        <hr>
+        
         
        
                 
@@ -197,9 +211,10 @@
         </script>
 
     <div class="container">
+        <hr>
         <!-- LOCAL INFORMATION -->
         <div class="mybox" >
-            <h2><span class="fa fa-user"></span><%=user2.local.username%></h2>
+            <h2><%=user2.local.username%> </h2>
                 <div class="propic">
                     <img src="<%=user2.local.imgurl%>" alt="avatar" class="img"> 
                 </div>
@@ -208,7 +223,7 @@
         </div>
         <!-- FRIENDS AND FAVORITES -->        
         <div class="mybox2" >
-            <h2><span class="fa fa-users"></span>Following</h2>
+            <h2>Following</h2>
             <div class="col-sm-12">
                  
             </div>
@@ -221,7 +236,7 @@
                     <% } %>
                 </div>
                 
-                <h2><span class="fa fa-headphones"></span>Favorite artists</h2>
+                <h2>Favorite Artists</h2>
             
                 <div class="col-sm-12">
                     <% if (typeof favorites !== 'undefined' && favorites[0] !== '' ) { %>
