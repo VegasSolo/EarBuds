@@ -60,7 +60,6 @@
     <!-- REMOTE CSS PAGES -->
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
     
@@ -77,12 +76,12 @@
             font-family: 'Megrim', sans-serif;
             font-weight: bolder;
             font-size: 400%;
+            text-align: center;
         }
         
         h2 {
             color:#006666;
             font-family: 'Grand Hotel', cursive;
-            
             text-align: center;
         }
         
@@ -105,7 +104,7 @@
             max-width:100%; 
             max-height:100%;
         }
-
+        
     	.modalDialog {
     		position: fixed;
     		font-family: Arial, Helvetica, sans-serif;
@@ -121,12 +120,10 @@
     		transition: opacity 400ms ease-in;
     		pointer-events: none;
     	}
-    
     	.modalDialog:target {
     		opacity:1;
     		pointer-events: auto;
     	}
-    
     	.modalDialog > div {
     		width: 400px;
     		position: relative;
@@ -138,7 +135,6 @@
     		background: -webkit-linear-gradient(#fff, #999);
     		background: -o-linear-gradient(#fff, #999);
     	}
-    
     	.close {
     		background: #606061;
     		color: #FFFFFF;
@@ -157,12 +153,11 @@
     		-webkit-box-shadow: 1px 1px 3px #000;
     		box-shadow: 1px 1px 3px #000;
     	}
-    
     	.close:hover { 
     	    background: #00d9ff; 
-    	    
     	}
-
+        	
+        /*CSS for typeahead*/   
         .typeahead, .tt-query, .tt-hint {
         	border: 2px solid #CCCCCC;
         	border-radius: 6px; 
@@ -173,15 +168,18 @@
         	padding: 4px 12px;
         	width: 422px;
         }
-        
         .typeahead {
         	background-color: #FFFFFF;
         }
-        
         .typeahead:focus {
         	border: 2px solid #0097CF;
         }
-       
+        .tt-query {
+        	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        }
+        .tt-hint {
+        	color: #999999;
+        }
         .tt-dropdown-menu {
         	background-color: #FFFFFF;
         	border: 1px solid rgba(0, 0, 0, 0.2);
@@ -192,49 +190,48 @@
         	width: 422px;
         	
         }
-        
         .tt-suggestion {
         	font-size: 24px;
         	line-height: 24px;
         	padding: 3px 20px;
         }
-        
         .tt-suggestion.tt-is-under-cursor {
         	background-color: #0097CF;
         	color: #FFFFFF;
         }
-        
         .tt-suggestion p {
         	margin: 0;
         }
-       
+      
        .mybox{
-          
             width:500px;
-            height:300px;
+            height:auto;
+	        min-height: 300px;
             border-radius: 25px 25px 25px 25px;
             background-color:rgba(255,255,255,0.7);
             float:left;
        }
        .mybox2{
             width:500px;
-            height:300px;
+            height:auto;
+            min-height:300px;
             border-radius: 25px 25px 25px 25px;
             background-color:rgba(255,255,255,0.7);
             float:right;
        }
        .mybox3{
             width:500px;
-            height:300px;
+            height:auto;
+            min-height:300px;
             border-radius: 25px 25px 25px 25px;
             background-color:rgba(255,255,255,0.7);
-            float:left;
-            text-align: justify;
+            float: left;
+            text-align: center;
             margin-top: 10px;
        }
        .propic{
            width: 200px;
-           height:200px;
+           min-height:200px;
            margin-left: auto;
            margin-right: auto
        }
@@ -244,8 +241,9 @@
 <body>
     
     <div class="container">
-        <h1 style="text-align: center"><br> <%= user.local.firstname %> <%= user.local.lastname %><br> </h1>
-       
+        
+            <h1> <%= user.local.firstname %> <%= user.local.lastname %></h1>
+        
         <!--Account Editing-->
         <div id="openModal" class="modalDialog">
         	<div class="well">
@@ -360,13 +358,13 @@
         <!-- check if the user has this token (is the user authenticated with this social account) -->
         <% if (user.spotify.token) { %>
         <div class="mybox3">
-            <h2><span class="fa fa-spotify"></span>Spotify</h2>
-            <p>
-                <strong>id</strong>: <%= user.spotify.id %><br>
-                <strong>token</strong>: <%= user.spotify.token %><br>
-                <strong>Spotify name</strong>: <%= user.spotify.name %><br>
-                <strong>Spotify email</strong>: <%= user.spotify.email %>
-            </p>
+            <div class="col-sm-12">
+                <h2><span class="fa fa-spotify"></span>Spotify</h2>
+                    <strong>id:</strong> <br><p4><%= user.spotify.id %></p4><br>
+                    <strong>token:</strong> <br><p4><%= user.spotify.token %></p4><br>
+                    <strong>Spotify name:</strong> <br><p4><%= user.spotify.name %></p4><br>
+                    <strong>Spotify email:</strong> <br><p4><%= user.spotify.email %></p4>
+            </div>
         </div>  
         <% } %>
 </div>
