@@ -22,14 +22,21 @@
      
       <form action="/artist" method="get" class="navbar-form navbar-left" role="search">
         <div class="form-group">
-        <input type="text" class="form-control" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
+        <input type="text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
-        <ul class="nav navbar-nav navbar-right">
+      
+      <ul class="nav navbar-nav navbar-right">
         <li><a href="#openModal">Edit Account</a></li>
-      <li><a href="/logout">Logout</a></li>
-      <li><a href="#">Login To Spotify</a></li>
+        <li><a href="/logout">Logout</a></li>
+
+            <!-- check if the user has this token (is the user authenticated with this social account) -->
+            <% if (user.spotify.token) { %>
+                <li><a href="/unlink/spotify"><span class="fa fa-spotify"></span>Unlink</a></li>
+            <% } else { %>
+                <li><a href="/connect/spotify"><span class="fa fa-spotify"></span>Connect Spotify</a></li>
+            <% } %>
       </ul>
     </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -37,9 +44,13 @@
     <!--END OF NAVBAR CODE-->
 
     <title>EarBuds</title>
+    
+    <!-- REMOTE CSS PAGES -->
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
 
     <style>
     
@@ -183,17 +194,25 @@
           
             width:500px;
             height:300px;
-             border-radius: 25px 25px 25px 25px;
+            border-radius: 25px 25px 25px 25px;
             background-color:rgba(255,255,255,0.7);
             float:left;
-        
        }
        .mybox2{
-           width:500px;
+            width:500px;
             height:300px;
-             border-radius: 25px 25px 25px 25px;
+            border-radius: 25px 25px 25px 25px;
             background-color:rgba(255,255,255,0.7);
             float:right;
+       }
+       .mybox3{
+            width:500px;
+            height:300px;
+            border-radius: 25px 25px 25px 25px;
+            background-color:rgba(255,255,255,0.7);
+            float:left;
+            text-align: justify;
+            margin-top: 10px;
        }
        .propic{
            width: 200px;
@@ -243,7 +262,7 @@
                         <input type="hidden" class="form-control" name="email" value=<%=user.local.email%> >
                     </div>
             
-                    <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+                    <button type="submit" class="btn btn-warning btn-lg center-block">Submit</button>
                 </form>
                 
         	</div>
@@ -313,9 +332,20 @@
                         <p style="text-align: center">No artists have been favorited by this user yet!</p>
                     <% } %>
                 </div>
-                
-                
         </div>
+        
+        <!-- check if the user has this token (is the user authenticated with this social account) -->
+        <% if (user.spotify.token) { %>
+        <div class="mybox3">
+            <h2><span class="fa fa-spotify"></span>Spotify</h2>
+            <p>
+                <strong>id</strong>: <%= user.spotify.id %><br>
+                <strong>token</strong>: <%= user.spotify.token %><br>
+                <strong>Spotify name</strong>: <%= user.spotify.name %><br>
+                <strong>Spotify email</strong>: <%= user.spotify.email %>
+            </p>
+        </div>  
+        <% } %>
 </div>
 
 </body>
