@@ -2,9 +2,13 @@
 
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
+var SpotifyStrategy = require('passport-spotify').Strategy;
 
 // load up the user model
 var User            = require('../app/models/user');
+
+// load the auth variables
+var configAuth = require('./auth');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -26,6 +30,94 @@ module.exports = function(passport) {
             done(err, user);
         });
     });
+    
+    // =========================================================================
+    // Spotify =================================================================
+    // =========================================================================
+    passport.use(new SpotifyStrategy({
+    
+            // pull in our app id and secret from our auth.js file
+            clientID        : configAuth.spotifyAuth.clientID,
+            clientSecret    : configAuth.spotifyAuth.clientSecret,
+            callbackURL     : configAuth.spotifyAuth.callbackURL,
+            passReqToCallback : true // allows us to pass back the entire request to the callback    
+        },
+    
+        // spotify will send back the token and profile
+        function(req, token, refreshToken, profile, done) {
+    
+            // asynchronous
+            process.nextTick(function() {
+                
+                // check if the user is already logged in
+                if (!req.user) {
+    
+                // find the user in the database based on their spotify id
+                    User.findOne({ 'spotify.id' : profile.id }, function(err, user) {
+        
+                        // if there is an error, stop everything and return that
+                        // ie an error connecting to the database
+                        if (err)
+                            return done(err);
+        
+                        // if the user is found, then log them in
+                        if (user) {
+                            // if there is a user id already but no token (user was linked at one point and then removed)
+                            // just add our token and profile information                            
+                            if (!user.spotify.token) {
+                                user.spotify.token = token;
+                                user.spotify.name  = profile.display_name;
+                                user.spotify.email = profile.email;
+    
+                                user.save(function(err) {
+                                    if (err)
+                                        throw err;
+                                    return done(null, user);
+                                });
+                            }
+                            
+                            return done(null, user); // user found, return that user
+                        } else {
+                            // if there is no user found with that spotify id, create them
+                            var newUser            = new User();
+        
+                            // set all of the spotify information in our user model
+                            newUser.spotify.id    = profile.id; // set the users spotify id                   
+                            newUser.spotify.token = token; // we will save the token that spotify provides to the user                    
+                            newUser.spotify.name  = profile.display_name;
+                            newUser.spotify.email = profile.email;
+        
+                            // save our user to the database
+                            newUser.save(function(err) {
+                                if (err)
+                                    throw err;
+        
+                                // if successful, return the new user
+                                return done(null, newUser);
+                            });
+                        }
+        
+                    });
+                } else {
+                    // user already exists and is logged in, we have to link accounts
+                    var user            = req.user; // pull the user out of the session
+    
+                    // update the current users spotify credentials
+                    user.spotify.id    = profile.id;
+                    user.spotify.token = token;
+                    user.spotify.name  = profile.display_name;
+                    user.spotify.email = profile.email;
+    
+                    // save the user
+                    user.save(function(err) {
+                        if (err)
+                            throw err;
+                        return done(null, user);
+                    });
+                }                   
+            });
+    
+    }));
 
     // =========================================================================
     // LOCAL SIGNUP ============================================================
