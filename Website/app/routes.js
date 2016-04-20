@@ -146,30 +146,38 @@ module.exports = function(app, passport) {
 					follow = follow.substr(1);
 					var array2 = follow.split(",");
 					
-					if (user == '%%%'){
-						res.render('profile.ejs', { 
-							user : req.user,
-							favorites : array,
-							follows : array2,
-							message : 'User is not in database'
-						});
-			        }
-			        else if (typeof user.local === 'undefined'){
-			 			res.render('profile.ejs', { 
-							user : req.user,
-							favorites : array,
-							follows : array2,
-							message : 'User is of type "undefined"'
-						});       	
-			        }
-			        else{
-			 			res.render('user.ejs', { 
-							user : req.user,
-							user2 : user,
-							follows : array2,
-							favorites : array
-						});       	
-			        } 
+					fetchFollow(req.user.local.email, function(err, follow2) {
+						if (err) throw err;	
+					
+						follow2 = follow2.substr(1);
+						var array3 = follow2.split(",");
+					
+						if (user == '%%%'){
+							res.render('profile.ejs', { 
+								user : req.user,
+								favorites : array,
+								follows : array2,
+								message : 'User is not in database'
+							});
+				        } 
+				        else if (typeof user.local === 'undefined'){
+				 			res.render('profile.ejs', { 
+								user : req.user,
+								favorites : array,
+								follows : array2,
+								message : 'User is of type "undefined"'
+							});       	
+				        } 
+				        else {
+				 			res.render('user.ejs', { 
+								user : req.user,
+								user2 : user,
+								Ufollows : array3,
+								follows : array2,
+								favorites : array
+							});       	
+				        } 
+					});
 				});
         	});
 		});
@@ -207,9 +215,17 @@ module.exports = function(app, passport) {
 	// =====================================
 	
 	app.get('/artist', function(req, res) {
-		res.render('artist.ejs', { 
-			user : req.user, 
-			typeahead : req.query.typeahead
+		fetchFave(req.user.local.email, function(err, bands) {
+			if (err) throw err;
+			
+			bands = bands.substr(1);
+			var array = bands.split(",");
+			
+			res.render('artist.ejs', { 
+				user : req.user, 
+				faves : array,
+				typeahead : req.query.typeahead
+			});
 		});
 	});
 	
@@ -229,36 +245,87 @@ module.exports = function(app, passport) {
 	//Add artist to user's liked artists
 	app.get('/fave', function(req,res){
 	    //Create fave
-		server.connection.query('INSERT INTO favorite (ID,User,Bands) SELECT * FROM ( SELECT null,"'+req.user.local.email+'",",'+req.query.fave+'") AS tmp WHERE NOT EXISTS (SELECT User FROM favorite WHERE User = "'+req.user.local.email+'") LIMIT 1',
+		server.connection.query('INSERT INTO favorite (ID,User,Bands) SELECT * FROM ( SELECT null,"'+req.user.local.email+'",",'+req.query.typeahead+'") AS tmp WHERE NOT EXISTS (SELECT User FROM favorite WHERE User = "'+req.user.local.email+'") LIMIT 1',
 		function(err){
 		    if (err) throw err;
 		});
 		//Update faves and check if artist is already favorited
-		server.connection.query('UPDATE favorite SET Bands = CONCAT(Bands, ",'+req.query.fave+'") WHERE User = "'+req.user.local.email+'" AND Bands NOT LIKE "%'+req.query.fave+'%"',
+		server.connection.query('UPDATE favorite SET Bands = CONCAT(Bands, ",'+req.query.typeahead+'") WHERE User = "'+req.user.local.email+'" AND Bands NOT LIKE "%'+req.query.typeahead+'%"',
 		function(err) {
 			if(err) throw err;
 		});
 	
-		res.render('artist.ejs', { 
-			user : req.user, 
-			typeahead : req.query.fave
-		});
+		res.redirect('/artist?typeahead='+req.query.typeahead);
 	});
 	
 	//Remove the artist from user's liked artists if exists
 	app.get('/unfave', function(req,res){
 		//Remove favorite band
-		server.connection.query('UPDATE favorite SET Bands = REPLACE(Bands, ",'+req.query.unfave+'", "") WHERE User = "'+req.user.local.email+'"',
+		server.connection.query('UPDATE favorite SET Bands = REPLACE(Bands, ",'+req.query.typeahead+'", "") WHERE User = "'+req.user.local.email+'"',
 		function(err) {
 			if(err) throw err;
 		});
-	
-		res.render('artist.ejs', { 
-			user : req.user, 
-			typeahead : req.query.unfave
-		}); 
+		
+		res.redirect('/artist?typeahead='+req.query.typeahead); 
 	});
 	
+	// =====================================
+    // SPOTIFY ROUTES =====================
+    // =====================================
+    // route for spotify authentication and login
+	app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private']}));
+	
+    // handle the callback after spotify has authenticated the user
+    app.get('/auth/spotify/callback',
+        passport.authenticate('spotify', {
+            successRedirect : '/profile',
+            failureRedirect : '/profile'
+     }));
+     
+    // =============================================================================
+	// AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
+	// =============================================================================
+
+    // locally --------------------------------
+    app.get('/connect/local', function(req, res) {
+        res.render('connect-local.ejs', { message: req.flash('loginMessage') });
+    });
+    app.post('/connect/local', passport.authenticate('local-signup', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/connect/local', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+    app.get('/unlink/local', function(req, res) {
+        var user            = req.user;
+        user.local.email    = undefined;
+        user.local.password = undefined;
+        user.save(function(err) {
+        	if (err) throw err;
+            res.redirect('/profile');
+        });
+	});
+
+    // spotify -------------------------------
+
+    // send to spotify to do the authentication
+    app.get('/connect/spotify', passport.authorize('spotify', {scope: ['user-read-email', 'user-read-private']}));
+
+    // handle the callback after spotify has authorized the user
+    app.get('/connect/spotify/callback',
+        passport.authorize('spotify', {
+            successRedirect : '/profile',
+            failureRedirect : '/profile'
+    }));
+    
+     // spotify -------------------------------
+    app.get('/unlink/spotify', function(req, res) {
+        var user            = req.user;
+        user.spotify.token = undefined;
+        user.save(function(err) {
+        	if (err) throw err;
+            res.redirect('/profile');
+        });
+    });
 
 	// =====================================
 	// LOGOUT ==============================
