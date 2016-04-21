@@ -22,16 +22,16 @@
      
       <form action="/artist" method="get" class="navbar-form navbar-left" role="search">
         <div class="form-group">
-        <input type="text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
+            <input type="text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
         </div>
-        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
+            <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
       </form>
             
       <form action="/user" method="get" class="navbar-form navbar-left" role="search">
         <div class="form-group">
-         <input type="text" style="vertical-align: top" class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
+            <input type="text" class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
         </div>
-        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
+            <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
       </form>
       
       
@@ -77,6 +77,7 @@
             font-weight: bolder;
             font-size: 400%;
             text-align: center;
+            text-shadow: -1px 0px 0px #006666, 0px 1px 0px #006666, 1px 0px 0px #006666, 0px -1px 0px #006666;
         }
         
         h2 {
@@ -103,6 +104,18 @@
             border: 1px solid black ;   
             max-width:100%; 
             max-height:100%;
+        }
+        .form-control {
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+            background-color: #FFFFFF;
+            border: 2px solid #CCCCCC;
+        	border-radius: 3px; 
+        	font-size: 14px;
+        	height: 32px;    
+        	line-height: 30px;
+        	outline: medium none;
+        	padding: 4px 12px;
+        	width: 211px;
         }
         
     	.modalDialog {
@@ -160,7 +173,7 @@
         /*CSS for typeahead*/   
         .typeahead, .tt-query, .tt-hint {
         	border: 2px solid #CCCCCC;
-        	border-radius: 6px; 
+        	border-radius: 3px; 
         	font-size: 16px;
         	height: 32px;    
         	line-height: 30px;
@@ -359,8 +372,7 @@
         <% if (user.spotify.token) { %>
         <div class="mybox3">
             <div class="col-sm-12">
-                <h2><span class="fa fa-spotify"></span>Spotify</h2>
-                    <strong>id:</strong> <br><p4><%= user.spotify.id %></p4><br>
+                <h2><span class="fa fa-spotify"></span><%=user.spotify.id%></h2>
                     <strong>token:</strong> <br><p4><%= user.spotify.token %></p4><br>
                     <strong>Spotify name:</strong> <br><p4><%= user.spotify.name %></p4><br>
                     <strong>Spotify email:</strong> <br><p4><%= user.spotify.email %></p4>

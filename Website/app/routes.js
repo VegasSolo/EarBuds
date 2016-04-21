@@ -198,17 +198,28 @@ module.exports = function(app, passport) {
 	// =====================================
 	
 	app.get('/artist', function(req, res) {
-		fetchFave(req.user.local.email, function(err, bands) {
+		allTitleCase(req.query.typeahead, function(err,fave) {
 			if (err) throw err;
 			
-			bands = bands.substr(1);
-			var array = bands.split(",");
-			
-			res.render('artist.ejs', { 
-				user : req.user, 
-				faves : array,
-				typeahead : req.query.typeahead
+			if (typeof req.user !== 'undefined'){
+			fetchFave(req.user.local.email, function(err, bands) {
+				if (err) throw err;
+				
+				bands = bands.substr(1);
+				var array = bands.split(",");
+				
+				res.render('artist.ejs', { 
+					user : req.user, 
+					faves : array,
+					typeahead : fave
+				});
 			});
+			} else {
+				res.render('artist.ejs', { 
+					user : req.user, 
+					typeahead : fave
+				});				
+			}
 		});
 	});
 	
