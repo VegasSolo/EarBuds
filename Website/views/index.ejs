@@ -2,18 +2,25 @@
 <!doctype html>
 <html>
     <head>
+    <!-- REMOTE CSS PAGES -->
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
     <title>Welcome to EarBuds!</title>
     
     <style>
+        body{ 
+            padding-top:50px;
+            color:#000000;
+            font-weight: bolder;
+        }
         h1 {
             color:#006666;
             font-family: 'Megrim', sans-serif;
             font-weight: bolder;
             font-size: 800%;
-            text-shadow: -1px 0px 1px #006666, 0px 1px 1px #006666, 1px 0px 1px #006666, 0px -1px 1px #006666;
+            text-shadow: -1px 0px 0px #006666, 0px 1px 0px #006666, 1px 0px 0px #006666, 0px -1px 0px #006666;
         }
         video{
             position:absolute;
@@ -31,19 +38,11 @@
             position:relative;
             color:#006666;
         }
-     
-    </style>
-    <style>
-        .bs-example{
-        	font-family: sans-serif;
-        	position: relative;
-        	float: left;
-        	z-index: 3;
         
-        }
+        /*CSS for typeahead*/   
         .typeahead, .tt-query, .tt-hint {
         	border: 2px solid #CCCCCC;
-        	border-radius: 6px; 
+        	border-radius: 3px; 
         	font-size: 16px;
         	height: 32px;    
         	line-height: 30px;
