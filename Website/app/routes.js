@@ -270,6 +270,25 @@ module.exports = function(app, passport) {
 	});
 	
 	// =====================================
+    // SIMILAR ARTIST =====================
+    // =====================================
+    // requires spotify login
+    app.get('/similar', function(req, res) {
+		fetchFave(req.user.local.email, function(err, bands) {
+			if (err) throw err;
+			
+			bands = bands.substr(1);
+			var array = bands.split(",");
+			
+			res.render('similar.ejs', { 
+				user : req.user, 
+				faves : array,
+				typeahead : req.query.typeahead
+			});
+		});
+	});
+	
+	// =====================================
     // SPOTIFY ROUTES =====================
     // =====================================
     // route for spotify authentication and login
