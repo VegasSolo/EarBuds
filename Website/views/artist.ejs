@@ -32,9 +32,9 @@
             
       <form action="/user" method="get" class="navbar-form navbar-left" role="search">
         <div class="form-group">
-         <input type="text" style="vertical-align: top" class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
+         <input type="text" class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
         </div>
-        <button type="submit" style="vertical-align: top" class="btn btn-warning btn-lgt">Submit</button>
+        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
       </form>
       
       <% if (typeof user !== 'undefined') { %>
@@ -58,7 +58,6 @@
         body {  
             background-size: 100% auto;
             word-wrap:break-word;
-            
         }
 
         h1 {
@@ -94,26 +93,34 @@
               font-family: sans-serif;
               font-weight: bolder;
               font-size: 150%;
-            }
+        }
         .img {
               border-radius: 6px; 
               border: 1px solid black ;   
               max-width:100%; 
               max-height:100%;
-            }
-            
+        }
+        .form-control {
+              box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+              background-color: #FFFFFF;
+              border: 2px solid #CCCCCC;
+            	border-radius: 3px; 
+            	font-size: 14px;
+            	height: 32px;    
+            	line-height: 30px;
+            	outline: medium none;
+            	padding: 4px 12px;
+            	width: 211px;
+        }
         .propic {
            width: 200px;
            height:200px;
            margin-left: auto;
            margin-right: auto
-            }
+        }
             
         /*CSS for album artwork! Do not modify!*/    
          #search-form,
-        .form-control {
-              margin-bottom: 10px;
-            }
         .cover {
               width: 300px;
               height: 300px;
@@ -133,13 +140,13 @@
         /*CSS for typeahead*/    
         .typeahead, .tt-query, .tt-hint {
         	border: 2px solid #CCCCCC;
-        	border-radius: 6px; 
+        	border-radius: 3px; 
         	font-size: 16px;
         	height: 32px;    
         	line-height: 30px;
         	outline: medium none;
         	padding: 4px 12px;
-        	width: 600px;
+        	width: 422px;
         }
         .typeahead {
         	background-color: #FFFFFF;

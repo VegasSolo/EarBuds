@@ -28,7 +28,7 @@
       
        <form action="/user" method="get" class="navbar-form navbar-left" role="search">
         <div class="form-group">
-         <input type="text" style="vertical-align: top," class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
+         <input type="text" class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
         </div>
         <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
       </form>
@@ -46,7 +46,7 @@
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
     <style>
         body        { 
@@ -57,11 +57,15 @@
              }
 
         h1 {
-           color:#ffffff;
+            color:#ffffff;
             font-family: 'Megrim', sans-serif;
             font-weight: bolder;
             font-size: 400%;
+<<<<<<< HEAD
 
+=======
+            text-shadow: -1px 0px 0px #006666, 0px 1px 0px #006666, 1px 0px 0px #006666, 0px -1px 0px #006666;
+>>>>>>> e90a0499dd400605943ac6b06c0fe4f0a25b9451
         }
         h2 {
             color:#006666;
@@ -76,7 +80,7 @@
             font-weight: bolder;
         }
         
-         hr{
+        hr{
             border-color:#ff9900;
         }
         p4{
@@ -84,14 +88,12 @@
           
             font-weight: bolder;
         }
-       
         .img {
             border-radius: 6px; 
             border: 1px solid black ;   
             max-width:100%; 
             max-height:100%;
         }
-
         .bs-example{
         	font-family: sans-serif;
         	position: relative;
@@ -99,9 +101,22 @@
         	z-index: 3;
         
         }
+        .form-control {
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+            background-color: #FFFFFF;
+            border: 2px solid #CCCCCC;
+        	border-radius: 3px; 
+        	font-size: 14px;
+        	height: 32px;    
+        	line-height: 30px;
+        	outline: medium none;
+        	padding: 4px 12px;
+        	width: 211px;
+        }
+        
         .typeahead, .tt-query, .tt-hint {
         	border: 2px solid #CCCCCC;
-        	border-radius: 6px; 
+        	border-radius: 3px; 
         	font-size: 16px;
         	height: 32px;    
         	line-height: 30px;
@@ -146,34 +161,32 @@
         
         
         .mybox{
-          
             width:500px;
             height:300px;
-             border-radius: 25px 25px 25px 25px;
+            border-radius: 25px 25px 25px 25px;
             background-color:rgba(255,255,255,0.7);
             float:left;
-        
-       }
-       .mybox2{
-           width:500px;
+        }
+        .mybox2{
+            width:500px;
             height:300px;
-             border-radius: 25px 25px 25px 25px;
+            border-radius: 25px 25px 25px 25px;
             background-color:rgba(255,255,255,0.7);
             float:right;
-       }
-       .propic{
-           width: 200px;
-           height:200px;
-           margin-left: auto;
-        margin-right: auto
-       }
+        }
+        .propic{
+            width: 200px;
+            height:200px;
+            margin-left: auto;
+            margin-right: auto
+        }
         
     </style>
 </head>
 <body>
 <div class="container">
     
-           <h1 style="text-align: center"><br> <%= user2.local.firstname %> <%= user2.local.lastname %><br> </h1>
+           <h1 style="text-align: center"><%= user2.local.firstname %> <%= user2.local.lastname %></h1>
            
             <% if (Ufollows[Ufollows.indexOf(user2.local.username)] !== user2.local.username) { %>
                 <div class="col-sm-12">   
@@ -224,26 +237,39 @@
         </div>
         <!-- FRIENDS AND FAVORITES -->        
         <div class="mybox2" >
-            <h2>Following</h2>
-            <div class="col-sm-12">
-                 
-            </div>
                 
                 <div class="col-sm-12">
+                    <h2>Following</h2>
                     <% if (typeof follows !== 'undefined' && follows[0] !== '' ) { %>
-                        <p style="text-align: center; margin-top: 10px"><%=follows%></p>
+                    
+                        <p style="text-align: center">                   
+                            <% for(var i=0;i<follows.length;i++) { %> 
+                                <a href="/user?user2=<%=follows[i]%>"><span class="fa fa-user"></span><p4><%=follows[i]%></p4></a>
+                            <% } %>
+                        </p>
+                        
                     <% } else {%>
-                        <p style="text-align: center; margin-top: 10px">Follows No One</p>
+                        <p style="text-align: center">No followers have been added by this user yet!</p>
                     <% } %>
                 </div>
                 
-                <h2>Favorite Artists</h2>
-            
                 <div class="col-sm-12">
+                    <h2>Favorite artists</h2>
+                    
                     <% if (typeof favorites !== 'undefined' && favorites[0] !== '' ) { %>
-                        <p style="text-align: center; margin-top: 10px"><%=favorites%></p>
+                    
+                        <p style="text-align: center">
+                            <% for(var i=0;i<favorites.length;i++) { %> 
+                                <a href="/artist?typeahead=<%=favorites[i]%>"><span class="fa fa-headphones"></span><p4><%=favorites[i]%></p4></a>
+                            <% } %>
+                        </p>
+                        
                     <% } else {%>
+<<<<<<< HEAD
                         <p style="text-align: center; margin-top: 10px">Follows No Artists</p>
+=======
+                        <p style="text-align: center">No artists have been favorited by this user yet!</p>
+>>>>>>> e90a0499dd400605943ac6b06c0fe4f0a25b9451
                     <% } %>
                 </div>
         </div>
