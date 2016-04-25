@@ -29,6 +29,13 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+       
+          <form action="/artist" method="get" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+            <input type="text" class="typeahead tt-query" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Search Artists">
+        </div>
+            <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
+      </form>
             
       <form action="/user" method="get" class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -55,11 +62,13 @@
     <!--END OF NAVBAR CODE-->
 
   <style>
+      
         body {  
+            background-image: url(images/wood.jpg);
             background-size: 100% auto;
             word-wrap:break-word;
         }
-
+        
         h1 {
             color:#006666;
             font-family: 'Megrim', sans-serif;
@@ -79,11 +88,12 @@
             font-family: 'Megrim', sans-serif;
             font-weight: bolder;
         }
+        
         p4{
             color:#006666;
-      
             font-weight: bolder;
         }
+        
         hr{
             border-color:#ff9900;
         }
@@ -181,8 +191,18 @@
         .tt-suggestion p {
         	margin: 0;
         }
-
+        .well{
+            background-color:rgba(255,255,255,0.7);
+        }
+        .cd{
+          padding-top:20px;
+          padding-bottom:20px;
+          padding-left:35px;
+          padding-right:20px;
+          
+        }
   </style>
+  
           <!-- TYPEAHEAD -->
         <script type="text/javascript" src="JS/jquery.min.js"></script>
         <script type="text/javascript" src="JS/typeahead.min.js"></script>
@@ -198,17 +218,7 @@
         </script>
         
       <div class="col-sm-9 well" style="margin-left: 2%">
-        <h1>Search for another Artist</h1>
-          <div>
-            <form action="/artist" method="get">
-              <input type="text" id="query" name="typeahead" style="vertical-align: bottom" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Search Artists">
-              <button type="submit" id="search" style="vertical-align: bottom" class="btn btn-warning btn-lgt">Search</button>
-            </form>
-          </div>
-          <div class="home">
-            <p>Or go <a href="/">home</a>.</p>
-          </div>
-        <div id="results"></div>
+      <div class="cd" id="results" ></div>
       </div>
       
             <!-- User Box only appears when logged In -->

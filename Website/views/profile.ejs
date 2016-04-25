@@ -39,7 +39,7 @@
       
         <ul class="nav navbar-nav navbar-right" >
             <li><a href="#openModal"><p4>Edit Account</p4></a></li>
-            <li><a href="/logout"><p4>Logout</p4></a></li>
+           
             
             <!-- check if the user has this token (is the user authenticated with this social account) -->
             <% if (user.spotify.token) { %>
@@ -47,7 +47,7 @@
             <% } else { %>
                 <li><a href="/connect/spotify"><span class="fa fa-spotify"></span><p4>Connect Spotify</p4></a></li>
             <% } %>
-            
+            <li><a href="/logout"><p4>Logout</p4></a></li>
         </ul>
         
     </div><!-- /.navbar-collapse -->
@@ -258,7 +258,7 @@
             <h1> <%= user.local.firstname %> <%= user.local.lastname %></h1>
         
         <!--Account Editing-->
-        <div id="openModal" class="modalDialog">
+        <div id="openModal" class="modalDialog" >
         	<div class="well">
         		<a href="#close" title="Close" class="close">X</a>
         		<h2>Edit Account</h2>
@@ -296,6 +296,7 @@
                 
         	</div>
         </div>
+        
    <!--End of Account Editing-->
     
           <!-- show any messages that come back with authentication -->
