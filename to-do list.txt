@@ -1,15 +1,12 @@
 # To Do List. If you are working on a task, place your name in front of it. Do not push to master until it is complete. #
 
-- Fix formatting & presentation (especially on artist.ejs page)
-- (Optional) Add typeahead functionality to artist.ejs
-- Add MANY more artists into artist.sql database (hundreds)
-- [Osvaldo] Spotify ACCOUNT integration (this should allow us to use Facebook integration and such through them as well)
 - Add playlist capability
 - When signed in, the user can search from their profile page that returns MORE than just 30 second preview albums (but rather full songs)
-- Add friends list in user accounts database to keep track of user id's that they are friends with
-- Add a 'like' button to each artist (ONLY the artists that are stored in artist.sql database)
-- Update user profile page to look cleaner (hide some of the useless information)
-- Add to user profile page a area that displays what artists they like and another area for friends
-- [Dillon] Add recommendation engine option for each artist (example code exists -- Dillon has it, ask him)
-- Menu bar for navigation
+- Add recommendation engine option for each artist
 - Bar on bottom that shows where you are in the song (like Soundcloud)
+
+
+FINAL ITERATION
+- menu bar (control bar on bottom, could be dummy for artist/song playing)
+- links to artists and users at favorite location (instead of strings)
+- full playback and playlist (w/ spotify) [taylor said this would be a plus]

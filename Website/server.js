@@ -62,7 +62,11 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 //Connects to artist DB
 var connection = mysql.createConnection({
     host : process.env.IP,
+<<<<<<< HEAD
     user : 'osvvald',   //INSERT YOUR CLOUD 9 USERNAME HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+=======
+   // user : 'vegassolo',   //INSERT YOUR CLOUD 9 USERNAME HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+>>>>>>> da00d0252ca43a7166739870d9a2f0bd6e8c70c6
     password : '',
     database : 'artists'
 });

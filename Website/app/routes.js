@@ -57,23 +57,6 @@ module.exports = function(app, passport) {
 	// =====================================
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
-	function fetchFave (email, cb) {
-		server.connection.query('select Bands from favorite where User = "'+email+'"',
-		function(err, rows) {
-			if (err) cb(err, null);
-			else if (typeof rows[0] === 'undefined') cb(null, "");
-			else cb(null, rows[0].Bands);
-		});
-	}
-
-	function fetchFollow (email, cb) {
-		server.connection.query('select following from follow where User = "'+email+'"',
-		function(err, rows) {
-			if (err) cb(err, null);
-			else if (typeof rows[0] === 'undefined') cb(null, "");
-			else cb(null, rows[0].following);
-		});
-	}
 	
 	//load user's own profile
 	app.get('/profile', isLoggedIn, function(req, res) {
@@ -146,30 +129,38 @@ module.exports = function(app, passport) {
 					follow = follow.substr(1);
 					var array2 = follow.split(",");
 					
-					if (user == '%%%'){
-						res.render('profile.ejs', { 
-							user : req.user,
-							favorites : array,
-							follows : array2,
-							message : 'User is not in database'
-						});
-			        }
-			        else if (typeof user.local === 'undefined'){
-			 			res.render('profile.ejs', { 
-							user : req.user,
-							favorites : array,
-							follows : array2,
-							message : 'User is of type "undefined"'
-						});       	
-			        }
-			        else{
-			 			res.render('user.ejs', { 
-							user : req.user,
-							user2 : user,
-							follows : array2,
-							favorites : array
-						});       	
-			        } 
+					fetchFollow(req.user.local.email, function(err, follow2) {
+						if (err) throw err;	
+					
+						follow2 = follow2.substr(1);
+						var array3 = follow2.split(",");
+					
+						if (user == '%%%'){
+							res.render('profile.ejs', { 
+								user : req.user,
+								favorites : array,
+								follows : array2,
+								message : 'User is not in database'
+							});
+				        } 
+				        else if (typeof user.local === 'undefined'){
+				 			res.render('profile.ejs', { 
+								user : req.user,
+								favorites : array,
+								follows : array2,
+								message : 'User is of type "undefined"'
+							});       	
+				        } 
+				        else {
+				 			res.render('user.ejs', { 
+								user : req.user,
+								user2 : user,
+								Ufollows : array3,
+								follows : array2,
+								favorites : array
+							});       	
+				        } 
+					});
 				});
         	});
 		});
@@ -207,9 +198,28 @@ module.exports = function(app, passport) {
 	// =====================================
 	
 	app.get('/artist', function(req, res) {
-		res.render('artist.ejs', { 
-			user : req.user, 
-			typeahead : req.query.typeahead
+		allTitleCase(req.query.typeahead, function(err,fave) {
+			if (err) throw err;
+			
+			if (typeof req.user !== 'undefined'){
+			fetchFave(req.user.local.email, function(err, bands) {
+				if (err) throw err;
+				
+				bands = bands.substr(1);
+				var array = bands.split(",");
+				
+				res.render('artist.ejs', { 
+					user : req.user, 
+					faves : array,
+					typeahead : fave
+				});
+			});
+			} else {
+				res.render('artist.ejs', { 
+					user : req.user, 
+					typeahead : fave
+				});				
+			}
 		});
 	});
 	
@@ -228,35 +238,37 @@ module.exports = function(app, passport) {
 	
 	//Add artist to user's liked artists
 	app.get('/fave', function(req,res){
-	    //Create fave
-		server.connection.query('INSERT INTO favorite (ID,User,Bands) SELECT * FROM ( SELECT null,"'+req.user.local.email+'",",'+req.query.fave+'") AS tmp WHERE NOT EXISTS (SELECT User FROM favorite WHERE User = "'+req.user.local.email+'") LIMIT 1',
-		function(err){
-		    if (err) throw err;
-		});
-		//Update faves and check if artist is already favorited
-		server.connection.query('UPDATE favorite SET Bands = CONCAT(Bands, ",'+req.query.fave+'") WHERE User = "'+req.user.local.email+'" AND Bands NOT LIKE "%'+req.query.fave+'%"',
-		function(err) {
-			if(err) throw err;
-		});
-	
-		res.render('artist.ejs', { 
-			user : req.user, 
-			typeahead : req.query.fave
+		allTitleCase(req.query.typeahead, function(err,fave) {
+			if (err) throw err;
+			
+		    //Create fave
+			server.connection.query('INSERT INTO favorite (ID,User,Bands) SELECT * FROM ( SELECT null,"'+req.user.local.email+'",",'+fave+'") AS tmp WHERE NOT EXISTS (SELECT User FROM favorite WHERE User = "'+req.user.local.email+'") LIMIT 1',
+			function(err){
+			    if (err) throw err;
+			});
+			//Update faves and check if artist is already favorited
+			server.connection.query('UPDATE favorite SET Bands = CONCAT(Bands, ",'+fave+'") WHERE User = "'+req.user.local.email+'" AND Bands NOT LIKE "%'+fave+'%"',
+			function(err) {
+				if(err) throw err;
+			});
+		
+			res.redirect('/artist?typeahead='+fave);
 		});
 	});
 	
 	//Remove the artist from user's liked artists if exists
 	app.get('/unfave', function(req,res){
-		//Remove favorite band
-		server.connection.query('UPDATE favorite SET Bands = REPLACE(Bands, ",'+req.query.unfave+'", "") WHERE User = "'+req.user.local.email+'"',
-		function(err) {
-			if(err) throw err;
+		allTitleCase(req.query.typeahead, function(err, fave) {
+			if (err) throw err;
+			
+			//Remove favorite band
+			server.connection.query('UPDATE favorite SET Bands = REPLACE(Bands, ",'+fave+'", "") WHERE User = "'+req.user.local.email+'"',
+			function(err) {
+				if(err) throw err;
+			});
+			
+			res.redirect('/artist?typeahead='+fave); 
 		});
-	
-		res.render('artist.ejs', { 
-			user : req.user, 
-			typeahead : req.query.unfave
-		}); 
 	});
 	
 	// =====================================
@@ -344,4 +356,33 @@ function isLoggedInProfile(req, res, next) {
 		res.redirect('/profile');
 	else
 		return next();
+}
+
+//uppercase all words in string
+function allTitleCase(inStr, cb) { 
+	cb(null, inStr.replace(/\w\S*/g, 
+		function(tStr) {
+		return tStr.charAt(0).toUpperCase() + tStr.substr(1).toLowerCase();
+		})
+	);
+}
+
+// get favorites string from mysql
+function fetchFave (email, cb) {
+	server.connection.query('select Bands from favorite where User = "'+email+'"',
+	function(err, rows) {
+		if (err) cb(err, null);
+		else if (typeof rows[0] === 'undefined') cb(null, "");
+		else cb(null, rows[0].Bands);
+	});
+}
+
+// get followers string from mysql
+function fetchFollow (email, cb) {
+	server.connection.query('select following from follow where User = "'+email+'"',
+	function(err, rows) {
+		if (err) cb(err, null);
+		else if (typeof rows[0] === 'undefined') cb(null, "");
+		else cb(null, rows[0].following);
+	});
 }
