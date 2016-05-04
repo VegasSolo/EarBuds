@@ -272,17 +272,17 @@ module.exports = function(app, passport) {
 	});
 	
 	// =====================================
-    // SIMILAR ARTIST =====================
+    // SUGGEST ARTIST =====================
     // =====================================
     // requires spotify login
-    app.get('/similar', function(req, res) {
+    app.get('/suggest', function(req, res) {
 		fetchFave(req.user.local.email, function(err, bands) {
 			if (err) throw err;
 			
 			bands = bands.substr(1);
 			var array = bands.split(",");
 			
-			res.render('similar.ejs', { 
+			res.render('suggest.ejs', { 
 				user : req.user, 
 				faves : array,
 				typeahead : req.query.typeahead

@@ -1,0 +1,350 @@
+<html>
+  <head>
+    
+    <script type='text/javascript' src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+  
+    <!-- REMOTE CSS PAGES -->
+    <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+    
+  <title>EarBuds</title>
+
+    <!--CODE FOR NAVBAR-->
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><p3>EB</p3></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            
+      <form action="/user" method="get" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+         <input type="text" class="form-control" name="user2" autocomplete="off" spellcheck="false" placeholder="Search Usernames">
+        </div>
+        <button type="submit" class="btn btn-warning btn-lgt">Submit</button>
+      </form>
+      
+      <% if (typeof user !== 'undefined') { %>
+        <ul class="nav navbar-nav navbar-right" >
+            <li><a href="/profile"><p4>Home</p4></a></li>
+            <li><a href="/logout"><p4>Logout</p4></a></li>
+        </ul>
+      <% } else {%>
+        <ul class="nav navbar-nav navbar-right" >
+            <li><a href="/login"><span class="fa fa-user"></span> Login </a></li>
+            <li><a href="/signup"><span class="fa fa-pencil-square-o"></span> Signup </a></li>
+        </ul>
+      <% } %>
+      
+    </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+    </nav>
+    <!--END OF NAVBAR CODE-->
+
+  <style>
+        body {  
+            background-size: 100% auto;
+            word-wrap:break-word;
+        }
+
+        h1 {
+            color:#006666;
+            font-family: 'Megrim', sans-serif;
+            font-weight: bolder;
+            font-size: 400%;
+        }
+        
+        h2 {
+            color:#006666;
+            font-family: 'Grand Hotel', cursive;
+            
+            text-align: center;
+        }
+        
+        p3{
+            color:#006666;
+            font-family: 'Megrim', sans-serif;
+            font-weight: bolder;
+        }
+        p4{
+            color:#006666;
+      
+            font-weight: bolder;
+        }
+        hr{
+            border-color:#ff9900;
+        }
+        
+        .text {
+              color:#006666;
+              font-family: sans-serif;
+              font-weight: bolder;
+              font-size: 150%;
+        }
+        .img {
+              border-radius: 6px; 
+              border: 1px solid black ;   
+              max-width:100%; 
+              max-height:100%;
+        }
+        .form-control {
+              box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+              background-color: #FFFFFF;
+              border: 2px solid #CCCCCC;
+            	border-radius: 3px; 
+            	font-size: 14px;
+            	height: 32px;    
+            	line-height: 30px;
+            	outline: medium none;
+            	padding: 4px 12px;
+            	width: 211px;
+        }
+        .propic {
+           width: 200px;
+           height:200px;
+           margin-left: auto;
+           margin-right: auto
+        }
+            
+        /*CSS for album artwork! Do not modify!*/    
+         #search-form,
+        .cover {
+              width: 300px;
+              height: 300px;
+              display: inline-block;
+              background-size: cover;
+            }
+        .cover:hover {
+              cursor: pointer;
+            }
+        .cover.playing {
+              border: 5px solid #e45343;
+            }
+
+          /*End of Album artwork code*/  
+
+            
+        /*CSS for typeahead*/    
+        .typeahead, .tt-query, .tt-hint {
+        	border: 2px solid #CCCCCC;
+        	border-radius: 3px; 
+        	font-size: 16px;
+        	height: 32px;    
+        	line-height: 30px;
+        	outline: medium none;
+        	padding: 4px 12px;
+        	width: 422px;
+        }
+        .typeahead {
+        	background-color: #FFFFFF;
+        }
+        .typeahead:focus {
+        	border: 2px solid #0097CF;
+        }
+        .tt-query {
+        	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        }
+        .tt-hint {
+        	color: #999999;
+        }
+        .tt-dropdown-menu {
+        	background-color: #FFFFFF;
+        	border: 1px solid rgba(0, 0, 0, 0.2);
+        	border-radius: 8px;
+        	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        	margin-top: 12px;
+        	padding: 8px 0;
+        	width: 600px;
+        }
+        .tt-suggestion {
+        	font-size: 24px;
+        	line-height: 24px;
+        	padding: 3px 20px;
+        }
+        .tt-suggestion.tt-is-under-cursor {
+        	background-color: #0097CF;
+        	color: #FFFFFF;
+        }
+        .tt-suggestion p {
+        	margin: 0;
+        }
+
+  </style>
+          <!-- TYPEAHEAD -->
+        <script type="text/javascript" src="JS/jquery.min.js"></script>
+        <script type="text/javascript" src="JS/typeahead.min.js"></script>
+            
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('input.typeahead').typeahead({
+                    name: 'typeahead',
+                    remote: 'https://'+window.location.host+'/search?key=%QUERY',
+                    limit: 10
+                });
+            });
+        </script>
+        
+      <div class="col-sm-9 well" style="margin-left: 2%">
+        <h1>Enter an artist and we'll recommend you some other similar artists!</h1>
+          <div>
+            <form action="/suggest" method="get">
+              <input type="text" id="query" name="typeahead" style="vertical-align: bottom" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Search Artists">
+              <button type="submit" id="search" style="vertical-align: bottom" class="btn btn-warning btn-lgt">Search</button>
+            </form>
+          </div>
+          <div class="home">
+            <p>Or go <a href="/">home</a>.</p>
+          </div>
+        <div id="results"></div>
+      </div>
+      
+            <!-- User Box only appears when logged In -->
+      <% if (typeof user !== 'undefined') { %>
+        <div class="col-sm-2 well" style="margin-left: 4%; margin-right: 2%">
+          <h2><span class="fa fa-user"></span><%=user.local.username%></h2>
+            <div class="pro-pic">
+              <img src="<%=user.local.imgurl%>" alt="avatar" class="img">
+            </div>
+        </div>
+      <% } %>
+      
+      <% if (typeof user !== 'undefined' && typeahead != "") { %>
+      <div class="col-sm-2 well" style="margin-left: 4%; margin-right: 2%">      
+        <h2 style="text-align: center"><span class="fa fa-headphones"></span><%=typeahead%></h2>
+        
+        <%if (faves[faves.indexOf(typeahead)] !== typeahead) { %>
+          <div class="col-sm-12">
+              <a href="/fave?typeahead=<%=typeahead%>" class="btn btn-warning btn-lgt center-block">Favorite</a>
+          </div>
+        <% } else { %>
+          <div class="col-sm-12">
+              <a href="/unfave?typeahead=<%=typeahead%>" class="btn btn-warning btn-lgt center-block">UnFavorite</a>
+          </div>
+        <% } %>
+        
+      </div>
+      <% } else { %>
+      <div class="col-sm-2 well" style="margin-left: 4%; margin-right: 2%">    
+        <h2 style="text-align: center"><span class="fa fa-headphones"></span><%=typeahead%></h2>   
+      </div>
+      <% } %>
+        
+  </head>
+  <body>
+    
+  <!--Javascript code-->
+  <script id="results-template" type="text/x-handlebars-template">
+  {{#each albums.items}}
+  <div style="background-image:url({{images.0.url}})" data-album-id="{{id}}" class="cover"></div>
+  {{/each}}
+  </script>
+  
+  <div class="wrapper">
+    <script>
+        var SpotifyWebApi = require('spotify-web-api-node');
+          var spotifyApi = new SpotifyWebApi();
+              
+            
+      spotifyApi.getArtistRelatedArtists(document.getElementById('query').value)
+        .then(function(data) {
+      
+          if (data.body.artists.length) {
+            // Print the number of similar artists
+            console.log('I got ' + data.body.artists.length + ' similar artists!');
+      
+            console.log('The most similar one is ' + data.body.artists[0].name);
+          } else {
+            console.log('I didn\'t find any similar artists.. Sorry.');
+          }
+      
+        }, function(err) {
+          console.log('Something went wrong..', err.message);
+        });
+    </script>
+  </div>
+</body>
+<script>
+  // Prefill the form and submit on page load
+  window.onload = function preFill() {
+    searchAlbums('<%=typeahead%>');
+    spotifyApi.getArtistsSimilarArtists('<%=typeahead%>')
+      .then(function(data) {
+      console.log('Artist information', data.body);
+      }, function(err) {
+      console.error(err);
+    });
+  };
+  
+  // find template and compile it
+  var templateSource = document.getElementById('results-template').innerHTML,
+    template = Handlebars.compile(templateSource),
+    resultsPlaceholder = document.getElementById('results'),
+    playingCssClass = 'playing',
+    audioObject = null;
+  
+  var fetchTracks = function(albumId, callback) {
+    $.ajax({
+      url: 'https://api.spotify.com/v1/recommendations',
+      success: function(response) {
+        callback(response);
+      }
+    });
+  };
+  
+  var searchAlbums = function(query) {
+    $.ajax({
+      url: 'https://api.spotify.com/v1/recommendations',
+      data: {
+        q: query,
+        type: 'album'
+      },
+      success: function(response) {
+        resultsPlaceholder.innerHTML = template(response);
+      }
+    });
+  };
+  
+  results.addEventListener('click', function(e) {
+    var target = e.target;
+    if (target !== null && target.classList.contains('cover')) {
+      if (target.classList.contains(playingCssClass)) {
+        audioObject.pause();
+      } else {
+        if (audioObject) {
+          audioObject.pause();
+        }
+        fetchTracks(target.getAttribute('data-album-id'), function(data) {
+          audioObject = new Audio(data.tracks.items[0].preview_url);
+          audioObject.play();
+          target.classList.add(playingCssClass);
+          audioObject.addEventListener('ended', function() {
+            target.classList.remove(playingCssClass);
+          });
+          audioObject.addEventListener('pause', function() {
+            target.classList.remove(playingCssClass);
+          });
+        });
+      }
+    }
+  });
+  
+  document.getElementById('search-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    searchAlbums(document.getElementById('query').value);
+  }, false);
+</script>
+<!--End of Javascript code-->
+</html>
